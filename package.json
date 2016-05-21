@@ -1,0 +1,16 @@
+{
+  "title": "Hide YouTube fullscreen controlls",
+  "name": "hideyoutubecontrolls",
+  "version": "1.2.0",
+  "description": "Hides the YouTube fullscreen controlls when moving the mouse to the left border",
+  "main": "index.js",
+  "author": "nralbrecht",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "youtube", "toggle", "hide", "fullscreen", "controlls", "gui"
+  ]
+}
