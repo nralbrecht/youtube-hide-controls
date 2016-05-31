@@ -1,7 +1,7 @@
 {
   "title": "Hide YouTube fullscreen controlls",
   "name": "hideyoutubecontrolls",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Hides the YouTube fullscreen controlls when moving the mouse to the left border",
   "main": "index.js",
   "author": "nralbrecht",
@@ -13,11 +13,19 @@
   "keywords": [
     "youtube", "toggle", "hide", "fullscreen", "controlls", "gui"
   ],
-  "preferences": [{
+  "preferences": [
+    {
       "description": "Defines the distance from witch on the YouTube controlls shuld get hiden.(You have to reload all tabs)",
       "name": "actionPadding",
       "type": "integer",
       "value": 5,
       "title": "Action padding"
-  }]
+    },{
+      "description": "Key code for the hotkey",
+      "type": "integer",
+      "name": "keyCode",
+      "value": 110,
+      "title": "Hotkey"
+    }
+  ]
 }
