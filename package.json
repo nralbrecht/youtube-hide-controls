@@ -14,7 +14,7 @@
     "youtube", "toggle", "hide", "fullscreen", "controlls", "gui"
   ],
   "preferences": [{
-      "description": "Defines the point from witch on the YouTube controlls shuld get hiden.(You have to reload all tabs)",
+      "description": "Defines the distance from witch on the YouTube controlls shuld get hiden.(You have to reload all tabs)",
       "name": "actionPadding",
       "type": "integer",
       "value": 5,

@@ -3,7 +3,6 @@ var options = {};
 
 self.port.on("prefs", function(newOptions) {
 	options = newOptions;
-	console.log(options.actionPadding);
 });
 
 document.addEventListener('mousemove', function(e) {
