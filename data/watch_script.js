@@ -16,6 +16,7 @@ document.addEventListener('mousemove', function(e) {
 		if (m_player.className.indexOf(' ytp-autohide') < 0) {
 			m_player.className += ' ytp-autohide';
 			triggered = true;
+			m_player.fucus();
 		}
 	} else if ((triggered && e.clientX > options.actionPadding) || key_was_pressed) {
 		if (m_player.className.indexOf(' ytp-autohide') >= 0) {
@@ -31,6 +32,7 @@ document.addEventListener('keydown', function(e) {
 		if (m_player.className.indexOf(' ytp-autohide') < 0) {
 			m_player.className += ' ytp-autohide';
 			key_was_pressed = true;
+			m_player.fucus();
 		}
 	}
 });
