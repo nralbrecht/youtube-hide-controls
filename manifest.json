@@ -1,0 +1,18 @@
+{
+
+  "manifest_version": 2,
+  "name": "Hide YouTube Fullscreen Controls",
+  "version": "2.0.0",
+
+  "description": "Hide the YouTube fullscreen controls when you move the cursor to the left border",
+  "homepage_url": "https://github.com/nralbrecht/youtube-hide-controls",
+
+  "content_scripts": [
+    {
+      "matches": [ "*://*.youtube.com/*" ],
+      "js": [ "content-script.js" ],
+      "run_at": "document_idle"
+    }
+  ]
+
+}
