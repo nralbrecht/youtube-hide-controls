@@ -1,6 +1,25 @@
-let triggerDistance = 20;
-let triggered = false;
 let yt_player = null;
+let triggered = false;
+
+let triggerDistance = 5;
+
+chrome.storage.local.get("triggerDistance", function(res) {
+    if (res.triggerDistance === undefined) {
+        triggerDistance = 5;
+
+        chrome.storage.local.set({
+            "triggerDistance": triggerDistance
+        });
+    } else {
+        triggerDistance = res.triggerDistance;
+    }
+});
+
+chrome.storage.onChanged.addListener(function(changes) {
+    if (changes["triggerDistance"]) {
+        triggerDistance = changes["triggerDistance"].newValue;
+    }
+});
 
 let mousemove_handler = function(e) {
     if (e.clientX <= triggerDistance) {

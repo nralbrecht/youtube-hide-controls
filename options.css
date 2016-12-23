@@ -1,0 +1,47 @@
+html, body {
+	margin: 0;
+	font-family: "Segoe UI", sans-serif;
+	font-size: 90%;
+}
+.setting {
+	font-size: 1rem;
+	border-top: 2px solid;
+	-moz-border-top-colors: rgba(28, 31, 37, 0.1) rgba(255, 255, 255, 0.1);
+	min-height: 30px;
+	width: 100%;
+}
+.preferences-info {
+	float: left;
+	width: 40%;
+}
+.preferences-title {
+	cursor: default;
+	margin-top: 1px;
+	margin-bottom: 2px;
+	-moz-margin-start: 6px;
+	-moz-margin-end: 5px;
+}
+.preferences-description {
+	font-size: .9rem;
+	color: #6D6D6D;
+	margin-top: -2px;
+	-moz-margin-start: 2em;
+	white-space: pre-wrap;
+}
+.preferences-input {
+	float: right;
+	width: 60%;
+}
+.preferences-input input {
+	-moz-box-align: center;
+	margin: 2px 4px;
+	margin-left: 0;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	-moz-padding-start: 4px;
+	-moz-padding-end: 2px;
+}
+
+input:invalid {
+	box-shadow: 0 0 1.5px 1px red;
+}
