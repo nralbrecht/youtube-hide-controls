@@ -9,6 +9,7 @@ html, body {
 	-moz-border-top-colors: rgba(28, 31, 37, 0.1) rgba(255, 255, 255, 0.1);
 	min-height: 30px;
 	width: 100%;
+	clear: both;
 }
 .preferences-info {
 	float: left;
