@@ -1,0 +1,30 @@
+{
+	"extensionName": {
+		"message": "YouTube-Vollbild-Steuerelemente ausblenden",
+		"description": "Name der Erweiterung"
+	},
+	"extensionDescription": {
+		"message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den linken Bildschirmrand bewegt wird.",
+		"description": "Beschreibung der Erweiterung"
+	},
+	"triggerDistanceOptionTitle": {
+		"message": "Auslöseentfernung",
+		"description": "Titel der Auslöseentfernungsoption"
+	},
+	"triggerDistanceOptionDescription": {
+		"message": "Die Schwelle, ab der die Steuerelemente ausgeblendet werden.",
+		"description": "Beschreibung der Auslöseentfernungsoption"
+	},
+	"useHotkeyOptionTitle": {
+		"message": "Benutze Hotkey",
+		"description": "Titel der 'benutze Hotkey' Option"
+	},
+	"hotkeyOptionTitle": {
+		"message": "Hotkey",
+		"description": "Titel der Hotkeyoption"
+	},
+	"hotkeyOptionDescription": {
+		"message": "Der Hotkey, der die Steuerelemente ausblendet.",
+		"description": "Beschreibung der der hotkey option"
+	}
+}

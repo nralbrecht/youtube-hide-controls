@@ -1,0 +1,30 @@
+{
+	"extensionName": {
+		"message": "Hide YouTube Fullscreen Controls",
+		"description": "Name of the extension"
+	},
+	"extensionDescription": {
+		"message": "Hide the YouTube fullscreen controls when you move the cursor to the left border.",
+		"description": "Description of the extension"
+	},
+	"triggerDistanceOptionTitle": {
+		"message": "Trigger Distance",
+		"description": "Title of the trigger distance option"
+	},
+	"triggerDistanceOptionDescription": {
+		"message": "The threshold at wich the controls get hidden.",
+		"description": "Description of the trigger distance option"
+	},
+	"useHotkeyOptionTitle": {
+		"message": "Use Hotkey",
+		"description": "Title of the trigger use hotkey option"
+	},
+	"hotkeyOptionTitle": {
+		"message": "Hotkey",
+		"description": "Title of the hotkey option"
+	},
+	"hotkeyOptionDescription": {
+		"message": "The hotkey that hides the YouTube controls",
+		"description": "Description of the hotkey option"
+	}
+}

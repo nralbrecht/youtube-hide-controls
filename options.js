@@ -56,3 +56,9 @@ hotkeyInput.addEventListener("keypress", function(e) {
 	e.target.value = keyToString(hotkey);
 	chrome.storage.local.set({ hotkey });
 });
+
+document.querySelectorAll("#triggerDistance .preferences-title")[0].innerText = chrome.i18n.getMessage("triggerDistanceOptionTitle");
+document.querySelectorAll("#triggerDistance .preferences-description")[0].innerText = chrome.i18n.getMessage("triggerDistanceOptionDescription");
+document.querySelectorAll("#useHotkey .preferences-title")[0].innerText = chrome.i18n.getMessage("useHotkeyOptionTitle");
+document.querySelectorAll("#hotkey .preferences-title")[0].innerText = chrome.i18n.getMessage("hotkeyOptionTitle");
+document.querySelectorAll("#hotkey .preferences-description")[0].innerText = chrome.i18n.getMessage("hotkeyOptionDescription");
