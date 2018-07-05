@@ -12,7 +12,7 @@
 		"description": "Titel der Auslöseentfernungsoption"
 	},
 	"triggerDistanceOptionDescription": {
-		"message": "Die Schwelle, ab der die Steuerelemente ausgeblendet werden.",
+		"message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze '-1' um eine Seite zu deaktivieren.",
 		"description": "Beschreibung der Auslöseentfernungsoption"
 	},
 	"useHotkeyOptionTitle": {

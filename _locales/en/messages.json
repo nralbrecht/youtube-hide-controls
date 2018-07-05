@@ -12,7 +12,7 @@
 		"description": "Title of the trigger distance option"
 	},
 	"triggerDistanceOptionDescription": {
-		"message": "The threshold at wich the controls get hidden.",
+		"message": "The threshold, from each site, at wich the controls will be hidden. All values in pixel. Use '-1' to disable one site.",
 		"description": "Description of the trigger distance option"
 	},
 	"useHotkeyOptionTitle": {

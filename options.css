@@ -5,11 +5,17 @@ html, body {
 }
 .setting {
 	font-size: 1rem;
-	border-top: 2px solid;
-	-moz-border-top-colors: rgba(28, 31, 37, 0.1) rgba(255, 255, 255, 0.1);
+	padding: 2px 0;
+	border-top: 1px solid;
+	border-color: hsla(210,4%,10%,.2);
 	min-height: 30px;
 	width: 100%;
 	clear: both;
+}
+.setting::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 .preferences-info {
 	float: left;
@@ -19,14 +25,14 @@ html, body {
 	cursor: default;
 	margin-top: 1px;
 	margin-bottom: 2px;
-	-moz-margin-start: 6px;
-	-moz-margin-end: 5px;
+	margin-left: 6px;
+	margin-right: 5px;
 }
 .preferences-description {
 	font-size: .9rem;
 	color: #6D6D6D;
 	margin-top: -2px;
-	-moz-margin-start: 2em;
+	margin-left: 2em;
 	white-space: pre-wrap;
 }
 .preferences-input {
@@ -34,15 +40,63 @@ html, body {
 	width: 60%;
 }
 .preferences-input input {
-	-moz-box-align: center;
 	margin: 2px 4px;
 	margin-left: 0;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	-moz-padding-start: 4px;
-	-moz-padding-end: 2px;
+	padding-left: 2px;
 }
-
+#hotkey input {
+	width: 192px;
+}
 input:invalid {
 	box-shadow: 0 0 1.5px 1px red;
+}
+
+.trigger-wrapper {
+	position: relative;
+	background-size: 192px 108px;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjE5MjAiIGhlaWdodD0iMTA4MCI+PHBhdGggZD0ibSA4MTAuMDAwMDEsMzcwIDAsMzAwIEwgMTExMCw1MjAgeiIgc3R5bGU9ImZpbGw6IzgwODA4MCIgLz48cGF0aCBkPSJtIDM1Miw5NTUgMCwyNSAtMzAyLDAgMCw1MCAzMDIsMCAwLDI1IDUwLDAgMCwtMjUgMTQ2OCwwIDAsLTUwIC0xNDY4LDAgMCwtMjUgLTUwLDAgeiIgc3R5bGU9ImZpbGw6IzgwODA4MCIgLz48L3N2Zz4=");
+	width: 192px;
+	height: 108px;
+	margin-bottom: 2px;
+	border: #666 solid 1px;
+}
+
+.trigger-wrapper > input {
+	box-sizing: border-box;
+	width: 4em;
+	height: 20px;
+	line-height: 20px;
+	margin: 2px;
+	padding-right: 0;
+	font-family: monospace;
+}
+
+#left {
+	position: absolute;
+	top: calc(50% - (20px / 2));
+	left: 0;
+}
+
+#top {
+	position: absolute;
+	top: 0;
+	left: calc(50% - (4em / 2));
+}
+
+#right {
+	position: absolute;
+	top: calc(50% - (20px / 2));
+	right: 0;
+}
+
+#bottom {
+	position: absolute;
+	bottom: 0;
+	left: calc(50% - (4em / 2));
+}
+
+code {
+	color: #000;
 }

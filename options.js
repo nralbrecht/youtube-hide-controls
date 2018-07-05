@@ -1,6 +1,10 @@
-let triggerDistanceInput = document.getElementsByName("triggerDistance")[0];
-let useHotkeyInput = document.getElementsByName("useHotkey")[0];
-let hotkeyInput = document.getElementsByName("hotkey")[0];
+let hotkeyInput = document.querySelector("#hotkey");
+let useHotkeyInput = document.querySelector("#useHotkey");
+
+let triggerTop = document.querySelector("#top");
+let triggerLeft = document.querySelector("#left");
+let triggerRight = document.querySelector("#right");
+let triggerBottom = document.querySelector("#bottom");
 
 function keyToString(e) {
 	if (e.shiftKey == undefined && e.ctrlKey == undefined && e.metaKey == undefined && e.altKey == undefined && e.key == undefined) return false;
@@ -14,20 +18,31 @@ function keyToString(e) {
 	return result;
 }
 
-chrome.storage.local.get(["triggerDistance", "useHotkey", "hotkey"], function(res) {
-	triggerDistanceInput.value = res.triggerDistance || 5;
+browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey"]).then(function(res) {
+	triggerTop.value = res.triggerTop || -1;
+	triggerLeft.value = res.triggerLeft || 5;
+	triggerRight.value = res.triggerRight || -1;
+	triggerBottom.value = res.triggerBottom || -1;
+
 	useHotkeyInput.checked = res.useHotkey || false;
 	if (!useHotkeyInput.checked) hotkeyInput.disabled = true;
+
 	hotkeyInput.value = keyToString(res.hotkey) || "none";
 });
 
-triggerDistanceInput.addEventListener("input", function(e) {
+function updateTrigger(e) {
 	if (e.target.validity.valid) {
-		chrome.storage.local.set({
-			"triggerDistance": e.target.value
-		});
+		let temp = {};
+		temp["trigger" + e.target.name] = e.target.value;
+		console.log("insert: ", temp);
+		browser.storage.local.set(temp);
 	}
-});
+}
+
+triggerTop.addEventListener("input", updateTrigger);
+triggerLeft.addEventListener("input", updateTrigger);
+triggerRight.addEventListener("input", updateTrigger);
+triggerBottom.addEventListener("input", updateTrigger);
 
 useHotkeyInput.addEventListener("click", function(e) {
 	if (e.target.checked) {
@@ -36,7 +51,7 @@ useHotkeyInput.addEventListener("click", function(e) {
 		hotkeyInput.disabled = true;
 	}
 
-	chrome.storage.local.set({
+	browser.storage.local.set({
 		"useHotkey": e.target.checked
 	});
 });
@@ -54,11 +69,11 @@ hotkeyInput.addEventListener("keypress", function(e) {
 	}
 	e.preventDefault();
 	e.target.value = keyToString(hotkey);
-	chrome.storage.local.set({ hotkey });
+	browser.storage.local.set({ hotkey });
 });
 
-document.querySelectorAll("#triggerDistance .preferences-title")[0].innerText = chrome.i18n.getMessage("triggerDistanceOptionTitle");
-document.querySelectorAll("#triggerDistance .preferences-description")[0].innerText = chrome.i18n.getMessage("triggerDistanceOptionDescription");
-document.querySelectorAll("#useHotkey .preferences-title")[0].innerText = chrome.i18n.getMessage("useHotkeyOptionTitle");
-document.querySelectorAll("#hotkey .preferences-title")[0].innerText = chrome.i18n.getMessage("hotkeyOptionTitle");
-document.querySelectorAll("#hotkey .preferences-description")[0].innerText = chrome.i18n.getMessage("hotkeyOptionDescription");
+document.querySelector("#triggerDistance .preferences-title").innerText = browser.i18n.getMessage("triggerDistanceOptionTitle");
+document.querySelector("#triggerDistance .preferences-description").innerText = browser.i18n.getMessage("triggerDistanceOptionDescription");
+document.querySelector("#useHotkey .preferences-title").innerText = browser.i18n.getMessage("useHotkeyOptionTitle");
+document.querySelector("#hotkey .preferences-title").innerText = browser.i18n.getMessage("hotkeyOptionTitle");
+document.querySelector("#hotkey .preferences-description").innerText = browser.i18n.getMessage("hotkeyOptionDescription");

@@ -1,28 +1,51 @@
-let hotkey;
-let useHotkey;
-let triggerDistance;
+let settings = {
+    "triggerTop": -1,
+    "triggerLeft": 5,
+    "triggerRight": -1,
+    "triggerBottom": -1,
+
+    "hotkey": null,
+    "useHotkey": false
+}
 let isHidden = false;
 
-browser.storage.local.get(["triggerDistance", "useHotkey", "hotkey"], function(res) {
-    triggerDistance = res.triggerDistance || 5;
-    useHotkey = res.useHotkey || false;
-    hotkey = res.hotkey || null;
+browser.storage.local.get(settings).then(function(res) {
+    settings.triggerTop = res.triggerTop || settings.triggerTop;
+    settings.triggerLeft = res.triggerLeft ||settings.triggerLeft;
+    settings.triggerRight = res.triggerRight || settings.triggerRight;
+    settings.triggerBottom = res.triggerBottom || settings.triggerBottom;
+
+    settings.hotkey = res.hotkey || settings.hotkey;
+    settings.useHotkey = res.useHotkey || settings.useHotkey;
 });
 
 browser.storage.onChanged.addListener(function(changes) {
-    if (changes.triggerDistance) {
-        triggerDistance = changes.triggerDistance.newValue;
+    if (changes.triggerTop) {
+        settings.triggerTop = changes.triggerTop.newValue;
+    }
+    if (changes.triggerLeft) {
+        settings.triggerLeft = changes.triggerLeft.newValue;
+    }
+    if (changes.triggerRight) {
+        settings.triggerRight = changes.triggerRight.newValue;
+    }
+    if (changes.triggerBottom) {
+        settings.triggerBottom = changes.triggerBottom.newValue;
     }
     if (changes.useHotkey) {
-        useHotkey = changes.useHotkey.newValue;
+        settings.useHotkey = changes.useHotkey.newValue;
     }
     if (changes.hotkey) {
-        hotkey = changes.hotkey.newValue;
+        settings.hotkey = changes.hotkey.newValue;
     }
 });
 
+function getPlayerElement() {
+    return document.getElementsByTagName("video")[0].parentElement.parentElement.wrappedJSObject;
+}
+
 function hideControls() {
-    var player = document.getElementsByTagName("video")[0].parentElement.parentElement.wrappedJSObject;
+    let player = getPlayerElement();
 
     player.hideControls();
     player.style.cursor = "none";
@@ -30,7 +53,7 @@ function hideControls() {
 }
 
 function showControls() {
-    var player = document.getElementsByTagName("video")[0].parentElement.parentElement.wrappedJSObject;
+    let player = getPlayerElement();
 
     player.showControls();
     player.style.cursor = "";
@@ -38,16 +61,21 @@ function showControls() {
 }
 
 document.addEventListener("mousemove", function(e) {
-    if (e.clientX <= triggerDistance) {
+    let triggered = e.clientX <= settings.triggerLeft
+        || e.clientY <= settings.triggerTop
+        || document.documentElement.clientWidth - e.clientX <= settings.triggerRight
+        || document.documentElement.clientHeight - e.clientY <= settings.triggerBottom;
+
+    if (triggered && getPlayerElement().classList.contains("ytp-fullscreen")) {
         hideControls();
-    } else if (isHidden && e.clientX > triggerDistance) {
+    } else if (isHidden) {
         showControls();
     }
 });
 
 document.addEventListener("keypress", function(e) { 
-    if (useHotkey && hotkey) {
-        if (hotkey.shiftKey == e.shiftKey && hotkey.ctrlKey == e.ctrlKey && hotkey.metaKey == e.metaKey && hotkey.altKey == e.altKey && hotkey.key == e.key) {
+    if (settings.useHotkey && settings.hotkey) {
+        if (settings.hotkey.shiftKey == e.shiftKey && settings.hotkey.ctrlKey == e.ctrlKey && settings.hotkey.metaKey == e.metaKey && settings.hotkey.altKey == e.altKey && settings.hotkey.key == e.key) {
             hideControls();
         }
     }
