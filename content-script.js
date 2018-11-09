@@ -76,7 +76,11 @@ document.addEventListener("mousemove", function(e) {
 document.addEventListener("keypress", function(e) { 
     if (settings.useHotkey && settings.hotkey) {
         if (settings.hotkey.shiftKey == e.shiftKey && settings.hotkey.ctrlKey == e.ctrlKey && settings.hotkey.metaKey == e.metaKey && settings.hotkey.altKey == e.altKey && settings.hotkey.key == e.key) {
-            hideControls();
+            if (isHidden) {
+                showControls();
+            } else {
+                hideControls();
+            }
         }
     }
 });
