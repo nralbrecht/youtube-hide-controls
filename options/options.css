@@ -56,7 +56,7 @@ input:invalid {
 .trigger-wrapper {
 	position: relative;
 	background-size: 192px 108px;
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjE5MjAiIGhlaWdodD0iMTA4MCI+PHBhdGggZD0ibSA4MTAuMDAwMDEsMzcwIDAsMzAwIEwgMTExMCw1MjAgeiIgc3R5bGU9ImZpbGw6IzgwODA4MCIgLz48cGF0aCBkPSJtIDM1Miw5NTUgMCwyNSAtMzAyLDAgMCw1MCAzMDIsMCAwLDI1IDUwLDAgMCwtMjUgMTQ2OCwwIDAsLTUwIC0xNDY4LDAgMCwtMjUgLTUwLDAgeiIgc3R5bGU9ImZpbGw6IzgwODA4MCIgLz48L3N2Zz4=");
+	background-image: url("background.svg");
 	width: 192px;
 	height: 108px;
 	margin-bottom: 2px;

@@ -15,6 +15,11 @@
     }
   },
 
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+
   "content_scripts": [
     {
       "matches": [ "*://*.youtube.com/*" ],
