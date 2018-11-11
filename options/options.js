@@ -1,5 +1,5 @@
-let hotkeyInput = document.querySelector("#hotkey");
-let useHotkeyInput = document.querySelector("#useHotkey");
+let hotkeyInput = document.querySelector("#hotkey input");
+let useHotkeyInput = document.querySelector("#useHotkey input");
 
 let triggerTop = document.querySelector("#top");
 let triggerLeft = document.querySelector("#left");
