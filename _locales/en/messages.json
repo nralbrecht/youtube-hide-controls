@@ -4,7 +4,7 @@
 		"description": "Name of the extension"
 	},
 	"extensionDescription": {
-		"message": "Hide the YouTube fullscreen controls when you move the cursor to the left border.",
+		"message": "Hide the YouTube fullscreen controls when you move the cursor to the display border.",
 		"description": "Description of the extension"
 	},
 	"triggerDistanceOptionTitle": {
@@ -24,7 +24,7 @@
 		"description": "Title of the hotkey option"
 	},
 	"hotkeyOptionDescription": {
-		"message": "The hotkey that hides the YouTube controls",
+		"message": "The hotkey that toggles the YouTube controls",
 		"description": "Description of the hotkey option"
 	}
 }

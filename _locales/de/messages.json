@@ -4,7 +4,7 @@
 		"description": "Name der Erweiterung"
 	},
 	"extensionDescription": {
-		"message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den linken Bildschirmrand bewegt wird.",
+		"message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
 		"description": "Beschreibung der Erweiterung"
 	},
 	"triggerDistanceOptionTitle": {
@@ -24,7 +24,7 @@
 		"description": "Titel der Hotkeyoption"
 	},
 	"hotkeyOptionDescription": {
-		"message": "Der Hotkey, der die Steuerelemente ausblendet.",
+		"message": "Der Hotkey, der die Sichtbarkeit der Steuerelemente umschaltet.",
 		"description": "Beschreibung der der hotkey option"
 	}
 }
