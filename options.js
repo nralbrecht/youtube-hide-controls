@@ -9,10 +9,12 @@ let triggerBottom = document.querySelector("#bottom");
 function keyToString(e) {
 	if (e.shiftKey == undefined && e.ctrlKey == undefined && e.metaKey == undefined && e.altKey == undefined && e.key == undefined) return false;
 
-	let result = (e.ctrlKey)? "Ctrl+" : "";
-	result += (e.shiftKey)? "Shift+" : "";
-	result += (e.altKey)? "Alt+" : "";
-	result += (e.meta)? "Meta+" : "";
+	let result = "";
+	if (e.ctrlKey) result += "Ctrl+";
+	if (e.shiftKey) result += "Shift+";
+	if (e.altKey) result += "Alt+";
+	if (e.meta) result += "Meta+";
+	if (e.code.startsWith("Numpad")) result += "Numpad ";
 	result += e.key[0].toUpperCase() + e.key.substr(1);
 
 	return result;
@@ -65,6 +67,7 @@ hotkeyInput.addEventListener("keypress", function(e) {
 		"ctrlKey": e.ctrlKey,
 		"metaKey": e.metaKey,
 		"altKey": e.altKey,
+		"code": e.code,
 		"key": e.key
 	}
 	e.preventDefault();
