@@ -18,7 +18,7 @@
   ],
 
   "options_ui": {
-    "page": "options.html"
+    "page": "options/options.html"
   },
 
   "permissions": [
