@@ -23,7 +23,7 @@ function keyToString(e) {
 browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey"]).then(function(res) {
 	triggerTop.value = res.triggerTop || -1;
 	triggerLeft.value = res.triggerLeft || 5;
-	triggerRight.value = res.triggerRight || -1;
+	triggerRight.value = res.triggerRight || 5;
 	triggerBottom.value = res.triggerBottom || -1;
 
 	useHotkeyInput.checked = res.useHotkey || false;

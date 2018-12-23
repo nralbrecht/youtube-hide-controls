@@ -1,7 +1,7 @@
 let settings = {
     "triggerTop": -1,
     "triggerLeft": 5,
-    "triggerRight": -1,
+    "triggerRight": 5,
     "triggerBottom": -1,
 
     "hotkey": null,
