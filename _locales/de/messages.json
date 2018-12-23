@@ -26,5 +26,9 @@
 	"hotkeyOptionDescription": {
 		"message": "Der Hotkey, der die Sichtbarkeit der Steuerelemente umschaltet.",
 		"description": "Beschreibung der der hotkey option"
+	},
+	"hotkeyPlaceholder": {
+		"message": "Nicht Definiert",
+		"description": "Hotkey-Eingabe-Platzhalter-Text"
 	}
 }

@@ -26,5 +26,9 @@
 	"hotkeyOptionDescription": {
 		"message": "The hotkey that toggles the YouTube controls",
 		"description": "Description of the hotkey option"
+	},
+	"hotkeyPlaceholder": {
+		"message": "None",
+		"description": "Hotkey input placeholder text"
 	}
 }

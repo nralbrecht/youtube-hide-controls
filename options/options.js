@@ -80,3 +80,4 @@ document.querySelector("#triggerDistance .preferences-description").innerText = 
 document.querySelector("#useHotkey .preferences-title").innerText = browser.i18n.getMessage("useHotkeyOptionTitle");
 document.querySelector("#hotkey .preferences-title").innerText = browser.i18n.getMessage("hotkeyOptionTitle");
 document.querySelector("#hotkey .preferences-description").innerText = browser.i18n.getMessage("hotkeyOptionDescription");
+hotkeyInput.placeholder = browser.i18n.getMessage("hotkeyPlaceholder");
