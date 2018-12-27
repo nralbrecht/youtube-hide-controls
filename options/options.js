@@ -1,5 +1,6 @@
 let hotkeyInput = document.querySelector("#hotkey input");
 let useHotkeyInput = document.querySelector("#useHotkey input");
+let invertTrigger = document.querySelector("#invertTrigger input");
 
 let triggerTop = document.querySelector("#top");
 let triggerLeft = document.querySelector("#left");
@@ -20,7 +21,7 @@ function keyToString(e) {
 	return result;
 }
 
-browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey"]).then(function(res) {
+browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"]).then(function(res) {
 	triggerTop.value = res.triggerTop || -1;
 	triggerLeft.value = res.triggerLeft || 5;
 	triggerRight.value = res.triggerRight || 5;
@@ -30,6 +31,8 @@ browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "trigger
 	if (!useHotkeyInput.checked) hotkeyInput.disabled = true;
 
 	hotkeyInput.value = keyToString(res.hotkey) || "none";
+
+	invertTrigger.checked = res.invertTrigger || false;
 });
 
 function updateTrigger(e) {
@@ -54,7 +57,7 @@ useHotkeyInput.addEventListener("click", function(e) {
 	}
 
 	browser.storage.local.set({
-		"useHotkey": e.target.checked
+		"useHotkey": useHotkeyInput.checked
 	});
 });
 
@@ -75,9 +78,17 @@ hotkeyInput.addEventListener("keypress", function(e) {
 	browser.storage.local.set({ hotkey });
 });
 
+invertTrigger.addEventListener("click", function(e) {
+	browser.storage.local.set({
+		"invertTrigger": invertTrigger.checked
+	});
+});
+
 document.querySelector("#triggerDistance .preferences-title").innerText = browser.i18n.getMessage("triggerDistanceOptionTitle");
 document.querySelector("#triggerDistance .preferences-description").innerText = browser.i18n.getMessage("triggerDistanceOptionDescription");
 document.querySelector("#useHotkey .preferences-title").innerText = browser.i18n.getMessage("useHotkeyOptionTitle");
 document.querySelector("#hotkey .preferences-title").innerText = browser.i18n.getMessage("hotkeyOptionTitle");
 document.querySelector("#hotkey .preferences-description").innerText = browser.i18n.getMessage("hotkeyOptionDescription");
+document.querySelector("#invertTrigger .preferences-title").innerText = browser.i18n.getMessage("invertTriggerOptionTitle");
+document.querySelector("#invertTrigger .preferences-description").innerText = browser.i18n.getMessage("invertTriggerOptionDescription");
 hotkeyInput.placeholder = browser.i18n.getMessage("hotkeyPlaceholder");

@@ -5,43 +5,35 @@ let settings = {
     "triggerBottom": -1,
 
     "hotkey": null,
-    "useHotkey": false
+    "useHotkey": false,
+    "invertTrigger": false
 }
 let isHidden = false;
 
 browser.storage.local.get(settings).then(function(res) {
-    settings.triggerTop = res.triggerTop || settings.triggerTop;
-    settings.triggerLeft = res.triggerLeft ||settings.triggerLeft;
-    settings.triggerRight = res.triggerRight || settings.triggerRight;
-    settings.triggerBottom = res.triggerBottom || settings.triggerBottom;
-
-    settings.hotkey = res.hotkey || settings.hotkey;
-    settings.useHotkey = res.useHotkey || settings.useHotkey;
+    for (let value in res) {
+        settings[value] = res[value] || settings[value];
+    }
 });
 
 browser.storage.onChanged.addListener(function(changes) {
-    if (changes.triggerTop) {
-        settings.triggerTop = changes.triggerTop.newValue;
-    }
-    if (changes.triggerLeft) {
-        settings.triggerLeft = changes.triggerLeft.newValue;
-    }
-    if (changes.triggerRight) {
-        settings.triggerRight = changes.triggerRight.newValue;
-    }
-    if (changes.triggerBottom) {
-        settings.triggerBottom = changes.triggerBottom.newValue;
-    }
-    if (changes.useHotkey) {
-        settings.useHotkey = changes.useHotkey.newValue;
-    }
-    if (changes.hotkey) {
-        settings.hotkey = changes.hotkey.newValue;
+    for (let value in changes) {
+        settings[value] = changes[value].newValue;
     }
 });
 
 function getPlayerElement() {
-    return document.getElementsByTagName("video")[0].parentElement.parentElement.wrappedJSObject;
+    for (let player of document.getElementsByTagName("video")) {
+        if (player.offsetParent != null) {
+            return player.parentElement.parentElement.wrappedJSObject;
+        }
+    }
+
+    throw new Error("No visible player element");
+}
+
+function isFullscreen() {
+    return !!document.mozFullScreenElement || !!document.fullscreenElement;
 }
 
 function hideControls() {
@@ -60,27 +52,58 @@ function showControls() {
     isHidden = false;
 }
 
+function onFullscreenChanged() {
+    if (isFullscreen() && settings.invertTrigger) {
+        hideControls();
+    }
+    else {
+        showControls();
+    }
+}
+onFullscreenChanged();
+document.addEventListener("mozfullscreenchange", onFullscreenChanged);
+document.addEventListener("fullscreenchange", onFullscreenChanged);
+document.addEventListener("mozfullscreenerror", onFullscreenChanged);
+document.addEventListener("fullscreenerror", onFullscreenChanged);
+
 document.addEventListener("mousemove", function(e) {
     let triggered = e.clientX <= settings.triggerLeft
         || e.clientY <= settings.triggerTop
         || document.documentElement.clientWidth - e.clientX <= settings.triggerRight
         || document.documentElement.clientHeight - e.clientY <= settings.triggerBottom;
 
-    if (triggered && getPlayerElement().classList.contains("ytp-fullscreen")) {
-        hideControls();
-    } else if (isHidden) {
-        showControls();
+    if (settings.invertTrigger) {
+        if (!isHidden && isFullscreen() && !triggered) {
+            hideControls();
+        }
+        else if (isHidden && ((!isFullscreen() && !triggered) || triggered)) {
+            showControls();
+        }
+    }
+    else {
+        if (!isHidden && isFullscreen() && triggered) {
+            hideControls();
+        }
+        else if (isHidden && isFullscreen() && !triggered) {
+            showControls();
+        }
     }
 });
 
 document.addEventListener("keypress", function(e) {
-    if (settings.useHotkey && settings.hotkey) {
-        if (settings.hotkey.shiftKey == e.shiftKey && settings.hotkey.ctrlKey == e.ctrlKey && settings.hotkey.metaKey == e.metaKey && settings.hotkey.altKey == e.altKey && settings.hotkey.code == e.code) {
-            if (isHidden) {
-                showControls();
-            } else {
-                hideControls();
-            }
+    let hotkeyOk = settings.useHotkey && settings.hotkey
+        && settings.hotkey.shiftKey == e.shiftKey
+        && settings.hotkey.ctrlKey == e.ctrlKey
+        && settings.hotkey.metaKey == e.metaKey
+        && settings.hotkey.altKey == e.altKey
+        && settings.hotkey.code == e.code;
+
+    if (isFullscreen() && hotkeyOk) {
+        if (isHidden) {
+            showControls();
+        }
+        else {
+            hideControls();
         }
     }
 });

@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "2.3.1",
+  "version": "2.4.0",
 
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/nralbrecht/youtube-hide-controls",
@@ -24,8 +24,7 @@
     {
       "matches": [ "*://*.youtube.com/*" ],
       "js": [ "content-script.js" ],
-      "run_at": "document_end",
-      "all_frames": true
+      "run_at": "document_idle"
     }
   ],
 

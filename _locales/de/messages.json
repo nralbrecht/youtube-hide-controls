@@ -12,7 +12,7 @@
 		"description": "Titel der Auslöseentfernungsoption"
 	},
 	"triggerDistanceOptionDescription": {
-		"message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze '-1' um eine Seite zu deaktivieren.",
+		"message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze \"-1\" um eine Seite zu deaktivieren.",
 		"description": "Beschreibung der Auslöseentfernungsoption"
 	},
 	"useHotkeyOptionTitle": {
@@ -30,5 +30,13 @@
 	"hotkeyPlaceholder": {
 		"message": "Nicht Definiert",
 		"description": "Hotkey-Eingabe-Platzhalter-Text"
+	},
+	"invertTriggerOptionTitle": {
+		"message": "Invertiere Funktion",
+		"description": "Title of the invert trigger option"
+	},
+	"invertTriggerOptionDescription": {
+		"message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey oder der Maus wieder eingeblendet werden.\nProbiere 70 als Auslöseentfernung für oben und unten.",
+		"description": "Description of the invert trigger option"
 	}
 }

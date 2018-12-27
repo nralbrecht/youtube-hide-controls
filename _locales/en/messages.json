@@ -12,7 +12,7 @@
 		"description": "Title of the trigger distance option"
 	},
 	"triggerDistanceOptionDescription": {
-		"message": "The threshold, from each site, at wich the controls will be hidden. All values in pixel. Use '-1' to disable one site.",
+		"message": "The threshold, from each site, at wich the controls will be hidden. All values in pixel. Use \"-1\" to disable one site.",
 		"description": "Description of the trigger distance option"
 	},
 	"useHotkeyOptionTitle": {
@@ -30,5 +30,13 @@
 	"hotkeyPlaceholder": {
 		"message": "None",
 		"description": "Hotkey input placeholder text"
+	},
+	"invertTriggerOptionTitle": {
+		"message": "Invert Trigger",
+		"description": "Title of the invert trigger option"
+	},
+	"invertTriggerOptionDescription": {
+		"message": "Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.\nTry 70 as trigger distance for the top and bottom.",
+		"description": "Description of the invert trigger option"
 	}
 }
