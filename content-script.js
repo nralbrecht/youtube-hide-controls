@@ -29,7 +29,7 @@ function getPlayerElement() {
         }
     }
 
-    throw new Error("No visible player element");
+    return null;
 }
 
 function isFullscreen() {
@@ -39,17 +39,21 @@ function isFullscreen() {
 function hideControls() {
     let player = getPlayerElement();
 
-    player.hideControls();
-    player.style.cursor = "none";
-    isHidden = true;
+    if (player) {
+        player.hideControls();
+        player.style.cursor = "none";
+        isHidden = true;
+    }
 }
 
 function showControls() {
     let player = getPlayerElement();
 
-    player.showControls();
-    player.style.cursor = "";
-    isHidden = false;
+    if (player) {
+        player.showControls();
+        player.style.cursor = "";
+        isHidden = false;
+    }
 }
 
 function onFullscreenChanged() {
