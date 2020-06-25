@@ -21,7 +21,7 @@ function keyToString(e) {
 	return result;
 }
 
-browser.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"]).then(function(res) {
+chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"]).then(function(res) {
 	triggerTop.value = res.triggerTop || -1;
 	triggerLeft.value = res.triggerLeft || 5;
 	triggerRight.value = res.triggerRight || 5;
@@ -40,7 +40,7 @@ function updateTrigger(e) {
 		let temp = {};
 		temp["trigger" + e.target.name] = e.target.value;
 		console.log("insert: ", temp);
-		browser.storage.local.set(temp);
+		chrome.storage.local.set(temp);
 	}
 }
 
@@ -56,7 +56,7 @@ useHotkeyInput.addEventListener("click", function(e) {
 		hotkeyInput.disabled = true;
 	}
 
-	browser.storage.local.set({
+	chrome.storage.local.set({
 		"useHotkey": useHotkeyInput.checked
 	});
 });
@@ -75,20 +75,20 @@ hotkeyInput.addEventListener("keypress", function(e) {
 	}
 	e.preventDefault();
 	e.target.value = keyToString(hotkey);
-	browser.storage.local.set({ hotkey });
+	chrome.storage.local.set({ hotkey });
 });
 
 invertTrigger.addEventListener("click", function(e) {
-	browser.storage.local.set({
+	chrome.storage.local.set({
 		"invertTrigger": invertTrigger.checked
 	});
 });
 
-document.querySelector("#triggerDistance .preferences-title").innerText = browser.i18n.getMessage("triggerDistanceOptionTitle");
-document.querySelector("#triggerDistance .preferences-description").innerText = browser.i18n.getMessage("triggerDistanceOptionDescription");
-document.querySelector("#useHotkey .preferences-title").innerText = browser.i18n.getMessage("useHotkeyOptionTitle");
-document.querySelector("#hotkey .preferences-title").innerText = browser.i18n.getMessage("hotkeyOptionTitle");
-document.querySelector("#hotkey .preferences-description").innerText = browser.i18n.getMessage("hotkeyOptionDescription");
-document.querySelector("#invertTrigger .preferences-title").innerText = browser.i18n.getMessage("invertTriggerOptionTitle");
-document.querySelector("#invertTrigger .preferences-description").innerText = browser.i18n.getMessage("invertTriggerOptionDescription");
-hotkeyInput.placeholder = browser.i18n.getMessage("hotkeyPlaceholder");
+document.querySelector("#triggerDistance .preferences-title").innerText = chrome.i18n.getMessage("triggerDistanceOptionTitle");
+document.querySelector("#triggerDistance .preferences-description").innerText = chrome.i18n.getMessage("triggerDistanceOptionDescription");
+document.querySelector("#useHotkey .preferences-title").innerText = chrome.i18n.getMessage("useHotkeyOptionTitle");
+document.querySelector("#hotkey .preferences-title").innerText = chrome.i18n.getMessage("hotkeyOptionTitle");
+document.querySelector("#hotkey .preferences-description").innerText = chrome.i18n.getMessage("hotkeyOptionDescription");
+document.querySelector("#invertTrigger .preferences-title").innerText = chrome.i18n.getMessage("invertTriggerOptionTitle");
+document.querySelector("#invertTrigger .preferences-description").innerText = chrome.i18n.getMessage("invertTriggerOptionDescription");
+hotkeyInput.placeholder = chrome.i18n.getMessage("hotkeyPlaceholder");
