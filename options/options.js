@@ -21,7 +21,7 @@ function keyToString(e) {
 	return result;
 }
 
-chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"]).then(function(res) {
+chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"], function (res) {
 	triggerTop.value = res.triggerTop || -1;
 	triggerLeft.value = res.triggerLeft || 5;
 	triggerRight.value = res.triggerRight || 5;
