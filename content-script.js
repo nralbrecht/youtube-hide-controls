@@ -10,13 +10,13 @@ let settings = {
 }
 let isHidden = false;
 
-browser.storage.local.get(settings).then(function(res) {
+chrome.storage.local.get(settings).then(function(res) {
     for (let value in res) {
         settings[value] = res[value] || settings[value];
     }
 });
 
-browser.storage.onChanged.addListener(function(changes) {
+chrome.storage.onChanged.addListener(function(changes) {
     for (let value in changes) {
         settings[value] = changes[value].newValue;
     }
