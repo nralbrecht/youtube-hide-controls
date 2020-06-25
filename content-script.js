@@ -33,7 +33,7 @@ function getPlayerElement() {
 }
 
 function isFullscreen() {
-    return !!document.mozFullScreenElement || !!document.fullscreenElement;
+    return Boolean(document.fullscreenElement || document.mozFullScreenElement);
 }
 
 function hideControls() {
