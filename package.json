@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/chrome": "^0.0.117"
+  }
+}
