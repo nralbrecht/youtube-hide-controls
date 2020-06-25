@@ -10,7 +10,7 @@ let settings = {
 }
 let isHidden = false;
 
-chrome.storage.local.get(settings).then(function(res) {
+chrome.storage.local.get(settings, function(res) {
     for (let value in res) {
         settings[value] = res[value] || settings[value];
     }
