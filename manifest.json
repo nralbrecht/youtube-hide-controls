@@ -8,7 +8,7 @@
   "homepage_url": "https://github.com/nralbrecht/youtube-hide-controls",
   "default_locale": "en",
 
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "@hideyoutubecontrolls",
       "strict_min_version": "48.0"
