@@ -30,7 +30,7 @@ chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerB
 	useHotkeyInput.checked = res.useHotkey || false;
 	if (!useHotkeyInput.checked) hotkeyInput.disabled = true;
 
-	hotkeyInput.value = keyToString(res.hotkey) || "none";
+	hotkeyInput.value = res.hotkey? keyToString(res.hotkey) : "none";
 
 	invertTrigger.checked = res.invertTrigger || false;
 });
