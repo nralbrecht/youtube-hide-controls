@@ -78,9 +78,12 @@ function onFullscreenChanged() {
     }
 }
 onFullscreenChanged();
-document.addEventListener("mozfullscreenchange", onFullscreenChanged);
+
+if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
+    document.addEventListener("mozfullscreenchange", onFullscreenChanged);
+    document.addEventListener("mozfullscreenerror", onFullscreenChanged);
+}
 document.addEventListener("fullscreenchange", onFullscreenChanged);
-document.addEventListener("mozfullscreenerror", onFullscreenChanged);
 document.addEventListener("fullscreenerror", onFullscreenChanged);
 
 document.addEventListener("mousemove", function(e) {
