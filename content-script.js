@@ -23,12 +23,25 @@ chrome.storage.onChanged.addListener(function(changes) {
 });
 
 function getPlayerElement() {
-    for (let player of document.getElementsByTagName("video")) {
-        if (player.offsetParent != null) {
+    // first search by id
+    const moviePlayer = document.getElementById("movie_player")
+    if (moviePlayer && moviePlayer.hideControls) {
+        return moviePlayer;
+    }
+    // search by class
+    const videoPlayers = document.getElementsByClassName("html5-video-player")
+    for (let player of videoPlayers) {
+        if (player.hideControls) {
+            return player;
+        }
+    }
+    // then search by tag name
+    const videoElement = document.getElementsByTagName("video")
+    for (let player of videoElement) {
+        if (player.offsetParent != null ) {
             return player.parentElement.parentElement.wrappedJSObject;
         }
     }
-
     return null;
 }
 
