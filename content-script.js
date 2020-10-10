@@ -31,7 +31,7 @@ script.addEventListener("load", function() {
 (document.head || document.documentElement).appendChild(script);
 
 function isFullscreen() {
-    return Boolean(document.fullscreenElement || document.mozFullScreenElement);
+    return Boolean(document.fullscreenElement);
 }
 
 function hideControls() {
@@ -62,10 +62,6 @@ function onFullscreenChanged() {
 }
 onFullscreenChanged();
 
-if (navigator.userAgent.indexOf("Firefox") !== -1 ) {
-    document.addEventListener("mozfullscreenchange", onFullscreenChanged);
-    document.addEventListener("mozfullscreenerror", onFullscreenChanged);
-}
 document.addEventListener("fullscreenchange", onFullscreenChanged);
 document.addEventListener("fullscreenerror", onFullscreenChanged);
 
