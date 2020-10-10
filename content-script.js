@@ -22,51 +22,34 @@ chrome.storage.onChanged.addListener(function(changes) {
     }
 });
 
-function getPlayerElement() {
-    // first search by id
-    const moviePlayer = document.getElementById("movie_player")
-    if (moviePlayer && moviePlayer.hideControls) {
-        return moviePlayer;
-    }
-    // search by class
-    const videoPlayers = document.getElementsByClassName("html5-video-player")
-    for (let player of videoPlayers) {
-        if (player.hideControls) {
-            return player;
-        }
-    }
-    // then search by tag name
-    const videoElement = document.getElementsByTagName("video")
-    for (let player of videoElement) {
-        if (player.offsetParent != null ) {
-            return player.parentElement.parentElement.wrappedJSObject;
-        }
-    }
-    return null;
-}
+// inject player script
+const script = document.createElement("script");
+script.setAttribute("src", chrome.runtime.getURL("player.js"));
+script.addEventListener("load", function() {
+    this.remove();
+});
+(document.head || document.documentElement).appendChild(script);
 
 function isFullscreen() {
     return Boolean(document.fullscreenElement || document.mozFullScreenElement);
 }
 
 function hideControls() {
-    let player = getPlayerElement();
+    isHidden = true;
 
-    if (player) {
-        player.hideControls();
-        player.style.cursor = "none";
-        isHidden = true;
-    }
+    window.postMessage({
+        "source": "YOUTUBE_HIDE_CONTROL",
+        "action": "HIDE_PLAYER"
+    });
 }
 
 function showControls() {
-    let player = getPlayerElement();
+    isHidden = false;
 
-    if (player) {
-        player.showControls();
-        player.style.cursor = "";
-        isHidden = false;
-    }
+    window.postMessage({
+        "source": "YOUTUBE_HIDE_CONTROL",
+        "action": "SHOW_PLAYER"
+    });
 }
 
 function onFullscreenChanged() {
