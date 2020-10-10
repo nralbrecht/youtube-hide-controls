@@ -69,6 +69,8 @@ hotkeyInput.addEventListener("keydown", function(e) {
     if (e.keyCode < 20 && e.keyCode > 15) return;
     if (e.target.name !== "hotkey") return;
 
+    e.preventDefault();
+
     let hotkey = {
         "shiftKey": e.shiftKey,
         "ctrlKey": e.ctrlKey,
