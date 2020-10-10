@@ -89,7 +89,7 @@ document.addEventListener("mousemove", function(e) {
     }
 });
 
-document.addEventListener("keypress", function(e) {
+document.addEventListener("keydown", function(e) {
     let hotkeyOk = settings.useHotkey && settings.hotkey
         && settings.hotkey.shiftKey == e.shiftKey
         && settings.hotkey.ctrlKey == e.ctrlKey

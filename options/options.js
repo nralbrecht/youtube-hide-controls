@@ -8,7 +8,9 @@ let triggerRight = document.querySelector("#right");
 let triggerBottom = document.querySelector("#bottom");
 
 function keyToString(e) {
-	if (e.shiftKey == undefined && e.ctrlKey == undefined && e.metaKey == undefined && e.altKey == undefined && e.key == undefined) return false;
+	if (e.shiftKey == e.ctrlKey == e.metaKey == e.altKey == e.key == undefined) {
+		return false;
+	}
 
 	let result = "";
 	if (e.ctrlKey) result += "Ctrl+";
@@ -28,7 +30,9 @@ chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerB
 	triggerBottom.value = res.triggerBottom || -1;
 
 	useHotkeyInput.checked = res.useHotkey || false;
-	if (!useHotkeyInput.checked) hotkeyInput.disabled = true;
+	if (!useHotkeyInput.checked) {
+		hotkeyInput.disabled = true;
+	}
 
 	hotkeyInput.value = res.hotkey? keyToString(res.hotkey) : "none";
 
@@ -61,9 +65,9 @@ useHotkeyInput.addEventListener("click", function(e) {
 	});
 });
 
-hotkeyInput.addEventListener("keypress", function(e) {
+hotkeyInput.addEventListener("keydown", function(e) {
 	if (e.keyCode < 20 && e.keyCode > 15) return;
-	if (document.activeElement.name !== "hotkey") return;
+	if (e.target.name !== "hotkey") return;
 
 	let hotkey = {
 		"shiftKey": e.shiftKey,
@@ -73,7 +77,7 @@ hotkeyInput.addEventListener("keypress", function(e) {
 		"code": e.code,
 		"key": e.key
 	}
-	e.preventDefault();
+
 	e.target.value = keyToString(hotkey);
 	chrome.storage.local.set({ hotkey });
 });
