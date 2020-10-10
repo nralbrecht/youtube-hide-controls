@@ -21,9 +21,15 @@
     }
   ],
 
+  "web_accessible_resources": [ "player.js" ],
+
   "options_ui": {
     "page": "options/options.html"
   },
 
-  "permissions": [ "storage", "*://www.youtube.com/*" ]
+  "permissions": [
+    "storage",
+    "*://www.youtube.com/*"
+  ]
+
 }
