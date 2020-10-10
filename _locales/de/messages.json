@@ -1,42 +1,42 @@
 {
-	"extensionName": {
-		"message": "YouTube-Vollbild-Steuerelemente ausblenden",
-		"description": "Name der Erweiterung"
-	},
-	"extensionDescription": {
-		"message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
-		"description": "Beschreibung der Erweiterung"
-	},
-	"triggerDistanceOptionTitle": {
-		"message": "Auslöseentfernung",
-		"description": "Titel der Auslöseentfernungsoption"
-	},
-	"triggerDistanceOptionDescription": {
-		"message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze \"-1\" um eine Seite zu deaktivieren.",
-		"description": "Beschreibung der Auslöseentfernungsoption"
-	},
-	"useHotkeyOptionTitle": {
-		"message": "Benutze Hotkey",
-		"description": "Titel der 'benutze Hotkey' Option"
-	},
-	"hotkeyOptionTitle": {
-		"message": "Hotkey",
-		"description": "Titel der Hotkeyoption"
-	},
-	"hotkeyOptionDescription": {
-		"message": "Der Hotkey, der die Sichtbarkeit der Steuerelemente umschaltet.",
-		"description": "Beschreibung der der hotkey option"
-	},
-	"hotkeyPlaceholder": {
-		"message": "Nicht Definiert",
-		"description": "Hotkey-Eingabe-Platzhalter-Text"
-	},
-	"invertTriggerOptionTitle": {
-		"message": "Invertiere Funktion",
-		"description": "Title of the invert trigger option"
-	},
-	"invertTriggerOptionDescription": {
-		"message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey oder der Maus wieder eingeblendet werden.\nProbiere 70 als Auslöseentfernung für oben und unten.",
-		"description": "Description of the invert trigger option"
-	}
+    "extensionName": {
+        "message": "YouTube-Vollbild-Steuerelemente ausblenden",
+        "description": "Name der Erweiterung"
+    },
+    "extensionDescription": {
+        "message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
+        "description": "Beschreibung der Erweiterung"
+    },
+    "triggerDistanceOptionTitle": {
+        "message": "Auslöseentfernung",
+        "description": "Titel der Auslöseentfernungsoption"
+    },
+    "triggerDistanceOptionDescription": {
+        "message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze \"-1\" um eine Seite zu deaktivieren.",
+        "description": "Beschreibung der Auslöseentfernungsoption"
+    },
+    "useHotkeyOptionTitle": {
+        "message": "Benutze Hotkey",
+        "description": "Titel der 'benutze Hotkey' Option"
+    },
+    "hotkeyOptionTitle": {
+        "message": "Hotkey",
+        "description": "Titel der Hotkeyoption"
+    },
+    "hotkeyOptionDescription": {
+        "message": "Der Hotkey, der die Sichtbarkeit der Steuerelemente umschaltet.",
+        "description": "Beschreibung der der hotkey option"
+    },
+    "hotkeyPlaceholder": {
+        "message": "Nicht Definiert",
+        "description": "Hotkey-Eingabe-Platzhalter-Text"
+    },
+    "invertTriggerOptionTitle": {
+        "message": "Invertiere Funktion",
+        "description": "Title of the invert trigger option"
+    },
+    "invertTriggerOptionDescription": {
+        "message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey oder der Maus wieder eingeblendet werden.\nProbiere 70 als Auslöseentfernung für oben und unten.",
+        "description": "Description of the invert trigger option"
+    }
 }

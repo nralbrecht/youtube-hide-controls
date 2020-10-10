@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Hide YouTube Fullscreen Controls - Options</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="options.css">
-		<script defer type="text/javascript" src="options.js"></script>
-	</head>
-	<body>
-		<div class="setting" id="triggerDistance">
-			<div class="preferences-info">
-				<div class="preferences-title">Trigger Distance</div>
-				<div class="preferences-description">The threshold, from each site, at wich the controls will be hidden.<br>All values in "px". Use "-1" to disable one site.</div>
-			</div>
-			<div class="preferences-input">
-				<div class="trigger-wrapper">
-					<input type="number" name="Left" id="left" min="-1" step="1">
-					<input type="number" name="Top" id="top" min="-1" step="1">
-					<input type="number" name="Right" id="right" min="-1" step="1">
-					<input type="number" name="Bottom" id="bottom" min="-1" step="1">
-				</div>
-			</div>
-		</div>
-		<div class="setting" id="useHotkey">
-			<div class="preferences-info">
-				<div class="preferences-title">Use Hotkey</div>
-			</div>
-			<div class="preferences-input">
-				<input type="checkbox" name="useHotkey">
-			</div>
-		</div>
-		<div class="setting" id="hotkey">
-			<div class="preferences-info">
-				<div class="preferences-title">Hotkey</div>
-				<div class="preferences-description">The hotkey that hides the controls.</div>
-			</div>
-			<div class="preferences-input">
-				<input type="text" name="hotkey" placeholder="None">
-			</div>
-		</div>
-		<div class="setting" id="invertTrigger">
-			<div class="preferences-info">
-				<div class="preferences-title">Invert Trigger</div>
-				<div class="preferences-description">Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.<br>Try 70 as trigger distance for the top and bottom.</div>
-			</div>
-			<div class="preferences-input">
-				<input type="checkbox" name="invertTrigger">
-			</div>
-		</div>
-	</body>
+    <head>
+        <title>Hide YouTube Fullscreen Controls - Options</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="options.css">
+        <script defer type="text/javascript" src="options.js"></script>
+    </head>
+    <body>
+        <div class="setting" id="triggerDistance">
+            <div class="preferences-info">
+                <div class="preferences-title">Trigger Distance</div>
+                <div class="preferences-description">The threshold, from each site, at wich the controls will be hidden.<br>All values in "px". Use "-1" to disable one site.</div>
+            </div>
+            <div class="preferences-input">
+                <div class="trigger-wrapper">
+                    <input type="number" name="Left" id="left" min="-1" step="1">
+                    <input type="number" name="Top" id="top" min="-1" step="1">
+                    <input type="number" name="Right" id="right" min="-1" step="1">
+                    <input type="number" name="Bottom" id="bottom" min="-1" step="1">
+                </div>
+            </div>
+        </div>
+        <div class="setting" id="useHotkey">
+            <div class="preferences-info">
+                <div class="preferences-title">Use Hotkey</div>
+            </div>
+            <div class="preferences-input">
+                <input type="checkbox" name="useHotkey">
+            </div>
+        </div>
+        <div class="setting" id="hotkey">
+            <div class="preferences-info">
+                <div class="preferences-title">Hotkey</div>
+                <div class="preferences-description">The hotkey that hides the controls.</div>
+            </div>
+            <div class="preferences-input">
+                <input type="text" name="hotkey" placeholder="None">
+            </div>
+        </div>
+        <div class="setting" id="invertTrigger">
+            <div class="preferences-info">
+                <div class="preferences-title">Invert Trigger</div>
+                <div class="preferences-description">Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.<br>Try 70 as trigger distance for the top and bottom.</div>
+            </div>
+            <div class="preferences-input">
+                <input type="checkbox" name="invertTrigger">
+            </div>
+        </div>
+    </body>
 </html>

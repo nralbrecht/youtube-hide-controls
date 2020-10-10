@@ -1,42 +1,42 @@
 {
-	"extensionName": {
-		"message": "Hide YouTube Fullscreen Controls",
-		"description": "Name of the extension"
-	},
-	"extensionDescription": {
-		"message": "Hide the YouTube fullscreen controls when you move the cursor to the display border.",
-		"description": "Description of the extension"
-	},
-	"triggerDistanceOptionTitle": {
-		"message": "Trigger Distance",
-		"description": "Title of the trigger distance option"
-	},
-	"triggerDistanceOptionDescription": {
-		"message": "The threshold, from each site, at wich the controls will be hidden. All values in pixel. Use \"-1\" to disable one site.",
-		"description": "Description of the trigger distance option"
-	},
-	"useHotkeyOptionTitle": {
-		"message": "Use Hotkey",
-		"description": "Title of the trigger use hotkey option"
-	},
-	"hotkeyOptionTitle": {
-		"message": "Hotkey",
-		"description": "Title of the hotkey option"
-	},
-	"hotkeyOptionDescription": {
-		"message": "The hotkey that toggles the YouTube controls",
-		"description": "Description of the hotkey option"
-	},
-	"hotkeyPlaceholder": {
-		"message": "None",
-		"description": "Hotkey input placeholder text"
-	},
-	"invertTriggerOptionTitle": {
-		"message": "Invert Trigger",
-		"description": "Title of the invert trigger option"
-	},
-	"invertTriggerOptionDescription": {
-		"message": "Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.\nTry 70 as trigger distance for the top and bottom.",
-		"description": "Description of the invert trigger option"
-	}
+    "extensionName": {
+        "message": "Hide YouTube Fullscreen Controls",
+        "description": "Name of the extension"
+    },
+    "extensionDescription": {
+        "message": "Hide the YouTube fullscreen controls when you move the cursor to the display border.",
+        "description": "Description of the extension"
+    },
+    "triggerDistanceOptionTitle": {
+        "message": "Trigger Distance",
+        "description": "Title of the trigger distance option"
+    },
+    "triggerDistanceOptionDescription": {
+        "message": "The threshold, from each site, at wich the controls will be hidden. All values in pixel. Use \"-1\" to disable one site.",
+        "description": "Description of the trigger distance option"
+    },
+    "useHotkeyOptionTitle": {
+        "message": "Use Hotkey",
+        "description": "Title of the trigger use hotkey option"
+    },
+    "hotkeyOptionTitle": {
+        "message": "Hotkey",
+        "description": "Title of the hotkey option"
+    },
+    "hotkeyOptionDescription": {
+        "message": "The hotkey that toggles the YouTube controls",
+        "description": "Description of the hotkey option"
+    },
+    "hotkeyPlaceholder": {
+        "message": "None",
+        "description": "Hotkey input placeholder text"
+    },
+    "invertTriggerOptionTitle": {
+        "message": "Invert Trigger",
+        "description": "Title of the invert trigger option"
+    },
+    "invertTriggerOptionDescription": {
+        "message": "Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.\nTry 70 as trigger distance for the top and bottom.",
+        "description": "Description of the invert trigger option"
+    }
 }
