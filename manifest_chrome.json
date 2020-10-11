@@ -1,0 +1,25 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
+    "homepage_url": "https://github.com/nralbrecht/youtube-hide-controls",
+    "default_locale": "en",
+    "icons": {
+        "128": "icon_128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [ "*://*.youtube.com/*" ],
+            "js": [ "content-script.js" ],
+            "run_at": "document_idle"
+        }
+    ],
+    "web_accessible_resources": [ "player.js" ],
+    "options_ui": {
+        "page": "options/options.html"
+    },
+    "permissions": [
+        "storage",
+        "*://www.youtube.com/*"
+    ]
+}
