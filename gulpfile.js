@@ -1,4 +1,4 @@
-const { parallel, src, dest, series } = require("gulp");
+const { parallel, src, dest, series, watch } = require("gulp");
 const del = require("del");
 const zip = require("gulp-zip");
 const rename = require("gulp-rename");
@@ -52,11 +52,23 @@ function buildChrome() {
         .pipe(dest(baseOutputFolder));
 }
 
+function watchAllCodeFiles() {
+    return watch([
+        "manifest_chrome.json",
+        "manifest_firefox.json",
+        "content-script.js",
+        "player.js",
+        "options/*"
+    ], parallel(firefox, chrome));
+}
+
 const firefox = series(cleanFirefox, buildFirefox);
 exports.firefox = firefox;
 
 const chrome = series(cleanChrome, buildChrome);
 exports.chrome = chrome;
+
+exports.watch = watchAllCodeFiles;
 
 exports.default = parallel(
     chrome,
