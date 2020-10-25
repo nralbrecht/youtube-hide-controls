@@ -38,5 +38,13 @@
     "invertTriggerOptionDescription": {
         "message": "Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.\nTry 70 as trigger distance for the top and bottom.",
         "description": "Description of the invert trigger option"
+    },
+    "onlyFullscreenOptionTitle": {
+        "message": "Only Fullscreen",
+        "description": "Title of the only fullscreen option"
+    },
+    "onlyFullscreenOptionDescription": {
+        "message": "Only hide the controls when the YouTube video is in fullscreen mode.",
+        "description": "Description of the only fullscreen option"
     }
 }

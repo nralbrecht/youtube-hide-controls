@@ -1,6 +1,7 @@
 let hotkeyInput = document.querySelector("#hotkey input");
 let useHotkeyInput = document.querySelector("#useHotkey input");
 let invertTrigger = document.querySelector("#invertTrigger input");
+let onlyFullscreen = document.querySelector("#onlyFullscreen input");
 
 let triggerTop = document.querySelector("#top");
 let triggerLeft = document.querySelector("#left");
@@ -23,7 +24,7 @@ function keyToString(e) {
     return result;
 }
 
-chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger"], function (res) {
+chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger", "onlyFullscreen"], function (res) {
     triggerTop.value = res.triggerTop || -1;
     triggerLeft.value = res.triggerLeft || 5;
     triggerRight.value = res.triggerRight || 5;
@@ -37,6 +38,7 @@ chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerB
     hotkeyInput.value = res.hotkey? keyToString(res.hotkey) : "none";
 
     invertTrigger.checked = res.invertTrigger || false;
+    onlyFullscreen.checked = res.onlyFullscreen || true;
 });
 
 function updateTrigger(e) {
@@ -90,6 +92,12 @@ invertTrigger.addEventListener("click", function(e) {
     });
 });
 
+onlyFullscreen.addEventListener("click", function(e) {
+    chrome.storage.local.set({
+        "onlyFullscreen": onlyFullscreen.checked
+    });
+});
+
 document.querySelector("#triggerDistance .preferences-title").innerText = chrome.i18n.getMessage("triggerDistanceOptionTitle");
 document.querySelector("#triggerDistance .preferences-description").innerText = chrome.i18n.getMessage("triggerDistanceOptionDescription");
 document.querySelector("#useHotkey .preferences-title").innerText = chrome.i18n.getMessage("useHotkeyOptionTitle");
@@ -97,4 +105,6 @@ document.querySelector("#hotkey .preferences-title").innerText = chrome.i18n.get
 document.querySelector("#hotkey .preferences-description").innerText = chrome.i18n.getMessage("hotkeyOptionDescription");
 document.querySelector("#invertTrigger .preferences-title").innerText = chrome.i18n.getMessage("invertTriggerOptionTitle");
 document.querySelector("#invertTrigger .preferences-description").innerText = chrome.i18n.getMessage("invertTriggerOptionDescription");
+document.querySelector("#onlyFullscreen .preferences-title").innerText = chrome.i18n.getMessage("onlyFullscreenOptionTitle");
+document.querySelector("#onlyFullscreen .preferences-description").innerText = chrome.i18n.getMessage("onlyFullscreenOptionDescription");
 hotkeyInput.placeholder = chrome.i18n.getMessage("hotkeyPlaceholder");

@@ -38,5 +38,13 @@
     "invertTriggerOptionDescription": {
         "message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey oder der Maus wieder eingeblendet werden.\nProbiere 70 als Auslöseentfernung für oben und unten.",
         "description": "Description of the invert trigger option"
+    },
+    "onlyFullscreenOptionTitle": {
+        "message": "Nur Vollbild",
+        "description": "Titel der only fullscreen option"
+    },
+    "onlyFullscreenOptionDescription": {
+        "message": "Blende die Steuerelemente nur aus, wenn das YouTube Video sich im Vollbildmodus befindet.",
+        "description": "Description of the only fullscreen option"
     }
 }

@@ -6,7 +6,8 @@ let settings = {
 
     "hotkey": null,
     "useHotkey": false,
-    "invertTrigger": false
+    "invertTrigger": false,
+    "onlyFullscreen": true
 }
 let isHidden = false;
 
@@ -31,7 +32,10 @@ script.addEventListener("load", function() {
 (document.head || document.documentElement).appendChild(script);
 
 function isFullscreen() {
-    return Boolean(document.fullscreenElement);
+    if (settings.onlyFullscreen) {
+        return Boolean(document.fullscreenElement);
+    }
+    return true;
 }
 
 function hideControls() {
