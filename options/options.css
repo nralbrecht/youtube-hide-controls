@@ -17,6 +17,9 @@ html, body {
     display: block;
     clear: both;
 }
+.setting.no-border {
+    border-top: 0;
+}
 .preferences-info {
     float: left;
     width: 40%;
