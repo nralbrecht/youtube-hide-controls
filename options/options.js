@@ -37,8 +37,8 @@ chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerB
 
     hotkeyInput.value = res.hotkey? keyToString(res.hotkey) : "none";
 
-    invertTrigger.checked = res.invertTrigger || false;
-    onlyFullscreen.checked = res.onlyFullscreen || true;
+    invertTrigger.checked = (res.invertTrigger == undefined) ? false : res.invertTrigger
+    onlyFullscreen.checked = (res.onlyFullscreen == undefined) ? true : res.onlyFullscreen
 });
 
 function updateTrigger(e) {
