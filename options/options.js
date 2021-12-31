@@ -1,5 +1,6 @@
 let hotkeyInput = document.querySelector("#hotkey input");
 let useHotkeyInput = document.querySelector("#useHotkey input");
+let onlyHotkey = document.querySelector("#onlyHotkey input");
 let invertTrigger = document.querySelector("#invertTrigger input");
 let onlyFullscreen = document.querySelector("#onlyFullscreen input");
 
@@ -24,13 +25,14 @@ function keyToString(e) {
     return result;
 }
 
-chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "hotkey", "invertTrigger", "onlyFullscreen"], function (res) {
+chrome.storage.local.get(["triggerTop", "triggerLeft", "triggerRight", "triggerBottom", "useHotkey", "onlyHotkey", "hotkey", "invertTrigger", "onlyFullscreen"], function (res) {
     triggerTop.value = res.triggerTop || -1;
     triggerLeft.value = res.triggerLeft || 5;
     triggerRight.value = res.triggerRight || 5;
     triggerBottom.value = res.triggerBottom || -1;
 
     useHotkeyInput.checked = res.useHotkey || false;
+    onlyHotkey.checked = res.onlyHotkey || false;
     if (!useHotkeyInput.checked) {
         hotkeyInput.disabled = true;
     }
@@ -64,6 +66,12 @@ useHotkeyInput.addEventListener("click", function(e) {
 
     chrome.storage.local.set({
         "useHotkey": useHotkeyInput.checked
+    });
+});
+
+onlyHotkey.addEventListener("click", function(e) {
+    chrome.storage.local.set({
+        "onlyHotkey": onlyHotkey.checked
     });
 });
 
@@ -101,6 +109,8 @@ onlyFullscreen.addEventListener("click", function(e) {
 document.querySelector("#triggerDistance .preferences-title").innerText = chrome.i18n.getMessage("triggerDistanceOptionTitle");
 document.querySelector("#triggerDistance .preferences-description").innerText = chrome.i18n.getMessage("triggerDistanceOptionDescription");
 document.querySelector("#useHotkey .preferences-title").innerText = chrome.i18n.getMessage("useHotkeyOptionTitle");
+document.querySelector("#onlyHotkey .preferences-title").innerText = chrome.i18n.getMessage("onlyHotkeyOptionTitle");
+document.querySelector("#onlyHotkey .preferences-description").innerText = chrome.i18n.getMessage("onlyHotkeyOptionDescription");
 document.querySelector("#hotkey .preferences-title").innerText = chrome.i18n.getMessage("hotkeyOptionTitle");
 document.querySelector("#hotkey .preferences-description").innerText = chrome.i18n.getMessage("hotkeyOptionDescription");
 document.querySelector("#invertTrigger .preferences-title").innerText = chrome.i18n.getMessage("invertTriggerOptionTitle");
