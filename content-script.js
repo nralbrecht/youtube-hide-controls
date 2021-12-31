@@ -6,7 +6,7 @@ let settings = {
 
     "hotkey": null,
     "useHotkey": false,
-    "onlyHotkey": true,
+    "onlyHotkey": false,
     "invertTrigger": false,
     "onlyFullscreen": true
 }
