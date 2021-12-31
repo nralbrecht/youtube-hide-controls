@@ -19,6 +19,14 @@
         "message": "Benutze Hotkey",
         "description": "Titel der 'benutze Hotkey' Option"
     },
+    "onlyHotkeyOptionTitle": {
+        "message": "Only Hotkey",
+        "description": "Title of the only hotkey option"
+    },
+    "onlyHotkeyOptionDescription": {
+        "message": "Player controls can only be toggled via hotkey and mouse movement will be ignored.",
+        "description": "Description of the only hotkey option"
+    },
     "hotkeyOptionTitle": {
         "message": "Hotkey",
         "description": "Titel der Hotkeyoption"

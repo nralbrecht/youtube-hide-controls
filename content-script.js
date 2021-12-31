@@ -6,6 +6,7 @@ let settings = {
 
     "hotkey": null,
     "useHotkey": false,
+    "onlyHotkey": true,
     "invertTrigger": false,
     "onlyFullscreen": true
 }
@@ -70,6 +71,10 @@ document.addEventListener("fullscreenchange", onFullscreenChanged);
 document.addEventListener("fullscreenerror", onFullscreenChanged);
 
 document.addEventListener("mousemove", function(e) {
+    if (settings.onlyHotkey){
+        return;
+    }
+
     let triggered = e.clientX <= settings.triggerLeft
         || e.clientY <= settings.triggerTop
         || document.documentElement.clientWidth - e.clientX <= settings.triggerRight
