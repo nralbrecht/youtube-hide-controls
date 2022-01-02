@@ -20,11 +20,11 @@
         "description": "Titel der 'benutze Hotkey' Option"
     },
     "onlyHotkeyOptionTitle": {
-        "message": "Only Hotkey",
+        "message": "Ausschließlich Hotkey",
         "description": "Title of the only hotkey option"
     },
     "onlyHotkeyOptionDescription": {
-        "message": "Player controls can only be toggled via hotkey and mouse movement will be ignored.",
+        "message": "Blende die Bedienungselemente ausschließlich mit dem Hotkey aus. Mauseingaben werden ignoriert.",
         "description": "Description of the only hotkey option"
     },
     "hotkeyOptionTitle": {
