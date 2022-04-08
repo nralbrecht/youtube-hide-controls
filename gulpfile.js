@@ -7,6 +7,7 @@ const jsonModify = require("gulp-json-modify");
 const rollup = require('gulp-rollup');
 
 const version = require("./package.json").version;
+const baseSourceFolder = "src/";
 const baseOutputFolder = "build";
 const outputFolderFirefox = baseOutputFolder + "/firefox";
 const outputFolderChrome = baseOutputFolder + "/chrome";
@@ -16,23 +17,23 @@ function cleanFirefox() {
 }
 
 function buildFirefox() {
-    const singleFiles = src("manifest_firefox.json")
+    const singleFiles = src(baseSourceFolder + "manifest_firefox.json")
         .pipe(rename("manifest.json"))
         .pipe(jsonModify({
             key: "version",
             value: version
         }))
-        .pipe(src("images/icon.svg"));
+        .pipe(src(baseSourceFolder + "images/icon.svg"));
 
-    const scripts = src("**/*.js")
+    const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({
-            input: ["content-script.js", "player.js"],
+            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js"],
             output: {
                 format: "esm"
             }
         }));
 
-    const directories = src(["options/**/*", "_locales/**/*"], {base: "."});
+    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "."});
 
     return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderFirefox))
@@ -45,23 +46,23 @@ function cleanChrome() {
 }
 
 function buildChrome() {
-    const singleFiles = src("manifest_chrome.json")
+    const singleFiles = src(baseSourceFolder + "manifest_chrome.json")
         .pipe(rename("manifest.json"))
         .pipe(jsonModify({
             key: "version",
             value: version
         }))
-        .pipe(src("images/icon_128.png"));
+        .pipe(src(baseSourceFolder + "images/icon_128.png"));
 
-    const scripts = src("**/*.js")
+    const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({
-            input: ["content-script.js", "player.js"],
+            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js"],
             output: {
                 format: "esm"
             }
         }));
 
-    const directories = src(["options/**/*", "_locales/**/*"], {base: "."});
+    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "."});
 
     return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderChrome))
@@ -71,11 +72,11 @@ function buildChrome() {
 
 function watchAllCodeFiles() {
     return watch([
-        "manifest_chrome.json",
-        "manifest_firefox.json",
-        "content-script.js",
-        "player.js",
-        "options/*"
+        baseSourceFolder + "manifest_chrome.json",
+        baseSourceFolder + "manifest_firefox.json",
+        baseSourceFolder + "content-script.js",
+        baseSourceFolder + "player.js",
+        baseSourceFolder + "options/*"
     ], parallel(firefox, chrome));
 }
 
