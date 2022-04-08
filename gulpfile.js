@@ -4,6 +4,7 @@ const zip = require("gulp-zip");
 const rename = require("gulp-rename");
 const mergeStream = require("merge-stream");
 const jsonModify = require("gulp-json-modify");
+const rollup = require('gulp-rollup');
 
 const version = require("./package.json").version;
 const baseOutputFolder = "build";
@@ -21,11 +22,19 @@ function buildFirefox() {
             key: "version",
             value: version
         }))
-        .pipe(src(["content-script.js", "player.js", "images/icon.svg"]));
+        .pipe(src("images/icon.svg"));
 
-    const directorys = src(["options/**/*", "_locales/**/*"], {base: "."});
+    const scripts = src("**/*.js")
+        .pipe(rollup({
+            input: ["content-script.js", "player.js"],
+            output: {
+                format: "esm"
+            }
+        }));
 
-    return mergeStream(singleFiles, directorys)
+    const directories = src(["options/**/*", "_locales/**/*"], {base: "."});
+
+    return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderFirefox))
         .pipe(zip("youtube-hide-controls_firefox_" + version + ".zip"))
         .pipe(dest(baseOutputFolder));
@@ -42,11 +51,19 @@ function buildChrome() {
             key: "version",
             value: version
         }))
-        .pipe(src(["content-script.js", "player.js", "images/icon_128.png"]));
+        .pipe(src("images/icon_128.png"));
 
-    const directorys = src(["options/**/*", "_locales/**/*"], {base: "."});
+    const scripts = src("**/*.js")
+        .pipe(rollup({
+            input: ["content-script.js", "player.js"],
+            output: {
+                format: "esm"
+            }
+        }));
 
-    return mergeStream(singleFiles, directorys)
+    const directories = src(["options/**/*", "_locales/**/*"], {base: "."});
+
+    return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderChrome))
         .pipe(zip("youtube-hide-controls_chrome_" + version + ".zip"))
         .pipe(dest(baseOutputFolder));

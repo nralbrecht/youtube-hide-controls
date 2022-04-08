@@ -1,28 +1,7 @@
-let settings = {
-    "triggerTop": -1,
-    "triggerLeft": 5,
-    "triggerRight": 5,
-    "triggerBottom": -1,
+import { PlayerStateMachine } from "./state-machine.js";
+import { Settings } from "./settings.js";
 
-    "hotkey": null,
-    "useHotkey": false,
-    "onlyHotkey": false,
-    "invertTrigger": false,
-    "onlyFullscreen": true
-}
-let isHidden = false;
-
-chrome.storage.local.get(settings, function(res) {
-    for (let value in res) {
-        settings[value] = res[value] || settings[value];
-    }
-});
-
-chrome.storage.onChanged.addListener(function(changes) {
-    for (let value in changes) {
-        settings[value] = changes[value].newValue;
-    }
-});
+const settings = new Settings();
 
 // inject player script
 const script = document.createElement("script");
@@ -32,16 +11,8 @@ script.addEventListener("load", function() {
 });
 (document.head || document.documentElement).appendChild(script);
 
-function isFullscreen() {
-    if (settings.onlyFullscreen) {
-        return Boolean(document.fullscreenElement);
-    }
-    return true;
-}
-
 function hideControls() {
-    isHidden = true;
-
+    console.log("HIDE_PLAYER!", settings);
     window.postMessage({
         "source": "YOUTUBE_HIDE_CONTROL",
         "action": "HIDE_PLAYER"
@@ -49,69 +20,94 @@ function hideControls() {
 }
 
 function showControls() {
-    isHidden = false;
-
+    console.log("SHOW_PLAYER!", settings);
     window.postMessage({
         "source": "YOUTUBE_HIDE_CONTROL",
         "action": "SHOW_PLAYER"
     });
 }
 
+const stateMachine = new PlayerStateMachine(showControls, hideControls, settings);
+console.log("machine", stateMachine);
+
+// handle fullscreen change
+function isFullscreen() {
+    if (settings.onlyFullscreen) {
+        return Boolean(document.fullscreenElement);
+    }
+    return true;
+}
+
 function onFullscreenChanged() {
-    if (isFullscreen() && settings.invertTrigger) {
-        hideControls();
+    if (isFullscreen()) {
+        stateMachine.send("fullscreenEntered");
     }
     else {
-        showControls();
+        stateMachine.send("fullscreenExited");
     }
 }
-onFullscreenChanged();
 
+onFullscreenChanged();
 document.addEventListener("fullscreenchange", onFullscreenChanged);
 document.addEventListener("fullscreenerror", onFullscreenChanged);
 
+// handle mouse tigger zone
 document.addEventListener("mousemove", function(e) {
     if (settings.onlyHotkey){
         return;
     }
 
-    let triggered = e.clientX <= settings.triggerLeft
+    let mouseIsInTriggerZone = e.clientX <= settings.triggerLeft
         || e.clientY <= settings.triggerTop
         || document.documentElement.clientWidth - e.clientX <= settings.triggerRight
         || document.documentElement.clientHeight - e.clientY <= settings.triggerBottom;
 
-    if (settings.invertTrigger) {
-        if (!isHidden && isFullscreen() && !triggered) {
-            hideControls();
-        }
-        else if (isHidden && ((!isFullscreen() && !triggered) || triggered)) {
-            showControls();
-        }
+    if (mouseIsInTriggerZone) {
+        stateMachine.send("mouseTriggerZoneEntered");
     }
     else {
-        if (!isHidden && isFullscreen() && triggered) {
-            hideControls();
-        }
-        else if (isHidden && isFullscreen() && !triggered) {
-            showControls();
-        }
+        stateMachine.send("mouseTriggerZoneExited");
     }
 });
 
+// handle hotkey
 document.addEventListener("keydown", function(e) {
-    let hotkeyOk = settings.useHotkey && settings.hotkey
+    let hotkeyMatches = settings.useHotkey && settings.hotkey
         && settings.hotkey.shiftKey == e.shiftKey
         && settings.hotkey.ctrlKey == e.ctrlKey
         && settings.hotkey.metaKey == e.metaKey
         && settings.hotkey.altKey == e.altKey
         && settings.hotkey.code == e.code;
 
-    if (isFullscreen() && hotkeyOk) {
-        if (isHidden) {
-            showControls();
-        }
-        else {
-            hideControls();
-        }
+    if (hotkeyMatches) {
+        stateMachine.send("hotkey");
     }
 });
+
+// function init() {
+//     const bottomControlElement = document.querySelector(".ytp-chrome-bottom");
+//     const topControlElement = document.querySelector(".ytp-chrome-top");
+
+//     const onEnter = function(e) {
+//         console.log("enter", "bottom", e);
+
+//         if (isFullscreen() && isHidden) {
+//             showControls();
+//         }
+//     }
+
+//     const onLeave = function(e) {
+//         console.log("leave", "bottom", e);
+
+//         if (isFullscreen() && !isHidden) {
+//             hideControls();
+//         }
+//     }
+
+//     bottomControlElement.addEventListener("mouseenter", onEnter);
+//     topControlElement.addEventListener("mouseenter", onEnter);
+
+//     bottomControlElement.addEventListener("mouseleave", onLeave);
+//     topControlElement.addEventListener("mouseleave", onLeave);
+// }
+// init();
