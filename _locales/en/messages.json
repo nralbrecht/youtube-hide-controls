@@ -1,10 +1,10 @@
 {
     "extensionName": {
-        "message": "Hide YouTube Fullscreen Controls",
+        "message": "Hide YouTube™ Fullscreen Controls",
         "description": "Name of the extension"
     },
     "extensionDescription": {
-        "message": "Hide the YouTube fullscreen controls when you move the cursor to the display border.",
+        "message": "Hide the YouTube™ fullscreen controls when you move the cursor to the display border.",
         "description": "Description of the extension"
     },
     "triggerDistanceOptionTitle": {
@@ -52,7 +52,7 @@
         "description": "Title of the only fullscreen option"
     },
     "onlyFullscreenOptionDescription": {
-        "message": "Only hide the controls when the YouTube video is in fullscreen mode.",
+        "message": "Only hide the controls when the YouTube™ video is in fullscreen mode.",
         "description": "Description of the only fullscreen option"
     }
 }

@@ -1,10 +1,10 @@
 {
     "extensionName": {
-        "message": "YouTube-Vollbild-Steuerelemente ausblenden",
+        "message": "YouTube™-Vollbild-Steuerelemente ausblenden",
         "description": "Name der Erweiterung"
     },
     "extensionDescription": {
-        "message": "Blendet die YouTube-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
+        "message": "Blendet die YouTube™-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
         "description": "Beschreibung der Erweiterung"
     },
     "triggerDistanceOptionTitle": {
@@ -52,7 +52,7 @@
         "description": "Titel der only fullscreen option"
     },
     "onlyFullscreenOptionDescription": {
-        "message": "Blende die Steuerelemente nur aus, wenn das YouTube Video sich im Vollbildmodus befindet.",
+        "message": "Blende die Steuerelemente nur aus, wenn das YouTube™ Video sich im Vollbildmodus befindet.",
         "description": "Description of the only fullscreen option"
     }
 }

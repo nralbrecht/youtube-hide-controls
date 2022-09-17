@@ -1,11 +1,11 @@
-# Hide YouTube video controls
+# Hide YouTube™ video controls
 
 Get the add-on from:
 - [Mozilla add-on page](https://addons.mozilla.org/de/firefox/addon/hide-youtube-controls/)
 - [Chrome web store](https://chrome.google.com/webstore/detail/hide-youtube-fullscreen-c/akkdefghgcakdgkmakeajmijjhlcofmk)
 - [GitHub Release Page](https://github.com/nralbrecht/youtube-hide-controls/releases)
 
-Does YouTube leave the video controls visible for longer than you like? Do you want to have a hotkey that toggles the controls?
+Does YouTube™ leave the video controls visible for longer than you like? Do you want to have a hotkey that toggles the controls?
 This add-on gives you the tools to change that.
 
 You can:
@@ -37,3 +37,7 @@ npm run build:chrome
 ```
 
 To debug the add-on see the respective documentation for [Google Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/) and [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
+
+### Legal Note
+YouTube™ is a trademark of Google Inc.
+Use of this trademark is subject to Google Permissions.
