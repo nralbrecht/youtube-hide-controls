@@ -33,7 +33,7 @@ function buildFirefox() {
             }
         }));
 
-    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "."});
+    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
 
     return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderFirefox))
@@ -62,7 +62,7 @@ function buildChrome() {
             }
         }));
 
-    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "."});
+    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
 
     return mergeStream(singleFiles, scripts, directories)
         .pipe(dest(outputFolderChrome))
