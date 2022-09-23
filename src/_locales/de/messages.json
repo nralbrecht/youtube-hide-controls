@@ -7,52 +7,107 @@
         "message": "Blendet die YouTube™-Vollbild-Steuerelemente aus, wenn der Mauszeiger an den Bildschirmrand bewegt wird.",
         "description": "Beschreibung der Erweiterung"
     },
-    "triggerDistanceOptionTitle": {
+
+    "generalSectionTitle": {
+        "message": "Allgemeines",
+        "description": "Title of the general section"
+    },
+
+    "hideVideoOverlaysPreferenceTitle": {
+        "message": "Verstecke Video Overlays",
+        "description": "Title of the hide video overlays option"
+    },
+    "hideVideoOverlaysPreferenceDescription": {
+        "message": "Verstecke die meisten Overlays (unter anderem Sponsorhinweise und Videovorschlagskärtchen am Ende von Videos). Untertitel werden nicht versteckt.",
+        "description": "Description of the hide video overlays option"
+    },
+
+    "hidePlayPauseAnimationPreferenceTitle": {
+        "message": "Verstecke die Wiedergabe- und Pauseanimation",
+        "description": "Title of the hide play pause animation option"
+    },
+    "hidePlayPauseAnimationPreferenceDescription": {
+        "message": "Verstecke den animierten Knopf, der angezeigt wird, wenn man das Video pausiert oder wieder abspielt.",
+        "description": "Description of the hide play pause animation option"
+    },
+
+    "useMouseSectionTitle": {
+        "message": "Mausinteraktion",
+        "description": "Title of the mouse interaction section"
+    },
+
+    "presetPreferenceTitle": {
+        "message": "Voreinstellungen",
+        "description": "Title of the preset option"
+    },
+    "presetPreferenceDescription": {
+        "message": "Wähle eine Voreinstellung für die Mausinteraktion.",
+        "description": "Description of the preset option"
+    },
+
+    "presetDropdownHideTitle": {
+        "message": "Verstecke, wenn am Bildschirmrand",
+        "description": "Title of the 'hide' entry in the preset dropdown"
+    },
+    "presetDropdownHideDescription": {
+        "message": "Verstecke die Steuerelemente, wenn die Maus an den Bildschirmrand geschoben wird.",
+        "description": "Description of the 'hide' entry in the preset dropdown"
+    },
+    "presetDropdownShowTitle": {
+        "message": "Zeige an, wenn über Steuerelement",
+        "description": "Title of the 'show' entry in the preset dropdown"
+    },
+    "presetDropdownShowDescription": {
+        "message": "Zeige die Steuerelemente nur an, wenn die Maus über die untere oder obere die Leiste bewegt wird.",
+        "description": "Description of the 'show' entry in the preset dropdown"
+    },
+    "presetDropdownCustomTitle": {
+        "message": "Benutzerdefiniert",
+        "description": "Title of the 'custom' entry in the preset dropdown"
+    },
+
+    "triggerDistancePreferenceTitle": {
         "message": "Auslöseentfernung",
         "description": "Titel der Auslöseentfernungsoption"
     },
-    "triggerDistanceOptionDescription": {
-        "message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze \"-1\" um eine Seite zu deaktivieren.",
+    "triggerDistancePreferenceDescription": {
+        "message": "Legt die Entfernungen von jeder Seite fest, ab der die Bedienungselemente ausgeblendet werden. Alle Werte in Pixel. Benutze 0 Pixel um eine Seite zu deaktivieren.",
         "description": "Beschreibung der Auslöseentfernungsoption"
     },
-    "useHotkeyOptionTitle": {
-        "message": "Benutze Hotkey",
-        "description": "Titel der 'benutze Hotkey' Option"
-    },
-    "onlyHotkeyOptionTitle": {
-        "message": "Ausschließlich Hotkey",
-        "description": "Title of the only hotkey option"
-    },
-    "onlyHotkeyOptionDescription": {
-        "message": "Blende die Bedienungselemente ausschließlich mit dem Hotkey aus. Mauseingaben werden ignoriert.",
-        "description": "Description of the only hotkey option"
-    },
-    "hotkeyOptionTitle": {
-        "message": "Hotkey",
-        "description": "Titel der Hotkeyoption"
-    },
-    "hotkeyOptionDescription": {
-        "message": "Der Hotkey, der die Sichtbarkeit der Steuerelemente umschaltet.",
-        "description": "Beschreibung der der hotkey option"
-    },
-    "hotkeyPlaceholder": {
-        "message": "Nicht Definiert",
-        "description": "Hotkey-Eingabe-Platzhalter-Text"
-    },
-    "invertTriggerOptionTitle": {
+
+    "invertTriggerPreferenceTitle": {
         "message": "Invertiere Funktion",
         "description": "Title of the invert trigger option"
     },
-    "invertTriggerOptionDescription": {
-        "message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey oder der Maus wieder eingeblendet werden.\nProbiere 70 als Auslöseentfernung für oben und unten.",
+    "invertTriggerPreferenceDescription": {
+        "message": "Blendet die Vollbild-Steuerelemente standardmäßig aus. Bei Bedarf können die Steuerelemente mit dem Hotkey, oder der Maus wieder eingeblendet werden.",
         "description": "Description of the invert trigger option"
     },
-    "onlyFullscreenOptionTitle": {
+
+    "onlyFullscreenPreferenceTitle": {
         "message": "Nur Vollbild",
         "description": "Titel der only fullscreen option"
     },
-    "onlyFullscreenOptionDescription": {
+    "onlyFullscreenPreferenceDescription": {
         "message": "Blende die Steuerelemente nur aus, wenn das YouTube™ Video sich im Vollbildmodus befindet.",
         "description": "Description of the only fullscreen option"
+    },
+
+    "useHotkeySectionTitle": {
+        "message": "Hotkey",
+        "description": "Title of the hotkey usage section"
+    },
+
+    "hotkeyPreferenceTitle": {
+        "message": "Hotkey",
+        "description": "Titel der Hotkeyoption"
+    },
+    "hotkeyPreferenceDescription": {
+        "message": "Beim Drücken des Hotkeys wird die Sichtbarkeit der Steuerelemente umgeschaltet.<br>Beachte, dass die Steuerelemente sofort wieder angezeigt werden, wenn die Maus bewegt wird. Sollte dies stören, kann die Mausinteraktion ausgeschaltet werden.",
+        "description": "Beschreibung der der Hotkeyoption"
+    },
+    "hotkeyPreferencePlaceholder": {
+        "message": "Nicht Definiert",
+        "description": "Hotkey-Eingabe-Platzhalter-Text"
     }
 }

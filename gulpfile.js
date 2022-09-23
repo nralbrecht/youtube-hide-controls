@@ -27,7 +27,7 @@ function buildFirefox() {
 
     const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({
-            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js"],
+            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js", baseSourceFolder + "options/options.js"],
             output: {
                 format: "esm"
             }
@@ -56,7 +56,7 @@ function buildChrome() {
 
     const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({
-            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js"],
+            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js", baseSourceFolder + "options/options.js"],
             output: {
                 format: "esm"
             }
@@ -75,6 +75,7 @@ function watchAllCodeFiles() {
         baseSourceFolder + "manifest_chrome.json",
         baseSourceFolder + "manifest_firefox.json",
         baseSourceFolder + "content-script.js",
+        baseSourceFolder + "settings.js",
         baseSourceFolder + "player.js",
         baseSourceFolder + "options/*"
     ], parallel(firefox, chrome));

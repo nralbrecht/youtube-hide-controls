@@ -1,8 +1,6 @@
 import { PlayerStateMachine } from "./state-machine.js";
 import { Settings } from "./settings.js";
 
-const settings = new Settings();
-
 // inject player script
 const script = document.createElement("script");
 script.setAttribute("src", chrome.runtime.getURL("player.js"));
@@ -11,8 +9,20 @@ script.addEventListener("load", function() {
 });
 (document.head || document.documentElement).appendChild(script);
 
+// inject styles
+const style = document.createElement("style");
+style.innerText = `
+.hidePlayPauseAnimation .ytp-bezel,
+.hideVideoOverlays .annotation,
+.hideVideoOverlays .ytp-ce-element,
+.hideVideoOverlays .ytp-paid-content-overlay {
+    display: none; !important
+}`;
+(document.head || document.documentElement).appendChild(style);
+
+
 function hideControls() {
-    console.log("HIDE_PLAYER!", settings);
+    console.log("[youtube-hide-controls] HIDE_PLAYER!", settings);
     window.postMessage({
         "source": "YOUTUBE_HIDE_CONTROL",
         "action": "HIDE_PLAYER"
@@ -20,15 +30,33 @@ function hideControls() {
 }
 
 function showControls() {
-    console.log("SHOW_PLAYER!", settings);
+    console.log("[youtube-hide-controls] SHOW_PLAYER!", settings);
     window.postMessage({
         "source": "YOUTUBE_HIDE_CONTROL",
         "action": "SHOW_PLAYER"
     });
 }
 
+function updateClassNames() {
+    window.postMessage({
+        "source": "YOUTUBE_HIDE_CONTROL",
+        "action": "HIDE_VIDEO_OVERLAYS",
+        "value": settings.hideVideoOverlays
+    });
+    window.postMessage({
+        "source": "YOUTUBE_HIDE_CONTROL",
+        "action": "HIDE_PLAY_PAUSE_ANIMATION",
+        "value": settings.hidePlayPauseAnimation
+    });
+}
+
+const settings = new Settings(() => {
+    updateClassNames();
+});
+settings.addOnChangeListener(() => {
+    updateClassNames();
+});
 const stateMachine = new PlayerStateMachine(showControls, hideControls, settings);
-console.log("machine", stateMachine);
 
 // handle fullscreen change
 function isFullscreen() {
@@ -53,14 +81,14 @@ document.addEventListener("fullscreenerror", onFullscreenChanged);
 
 // handle mouse tigger zone
 document.addEventListener("mousemove", function(e) {
-    if (settings.onlyHotkey){
+    if (!settings.useMouse){
         return;
     }
 
-    let mouseIsInTriggerZone = e.clientX <= settings.triggerLeft
-        || e.clientY <= settings.triggerTop
-        || document.documentElement.clientWidth - e.clientX <= settings.triggerRight
-        || document.documentElement.clientHeight - e.clientY <= settings.triggerBottom;
+    let mouseIsInTriggerZone = e.clientX < settings.triggerLeft
+        || e.clientY < settings.triggerTop
+        || document.documentElement.clientWidth - e.clientX < settings.triggerRight
+        || document.documentElement.clientHeight - e.clientY < settings.triggerBottom;
 
     if (mouseIsInTriggerZone) {
         stateMachine.send("mouseTriggerZoneEntered");
@@ -83,31 +111,3 @@ document.addEventListener("keydown", function(e) {
         stateMachine.send("hotkey");
     }
 });
-
-// function init() {
-//     const bottomControlElement = document.querySelector(".ytp-chrome-bottom");
-//     const topControlElement = document.querySelector(".ytp-chrome-top");
-
-//     const onEnter = function(e) {
-//         console.log("enter", "bottom", e);
-
-//         if (isFullscreen() && isHidden) {
-//             showControls();
-//         }
-//     }
-
-//     const onLeave = function(e) {
-//         console.log("leave", "bottom", e);
-
-//         if (isFullscreen() && !isHidden) {
-//             hideControls();
-//         }
-//     }
-
-//     bottomControlElement.addEventListener("mouseenter", onEnter);
-//     topControlElement.addEventListener("mouseenter", onEnter);
-
-//     bottomControlElement.addEventListener("mouseleave", onLeave);
-//     topControlElement.addEventListener("mouseleave", onLeave);
-// }
-// init();

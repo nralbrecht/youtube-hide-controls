@@ -1,1 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1920" height="1080"><path d="m 810.00001,370 0,300 L 1110,520 z" style="fill:#808080" /><path d="m 352,955 0,25 -302,0 0,50 302,0 0,25 50,0 0,-25 1468,0 0,-50 -1468,0 0,-25 -50,0 z" style="fill:#808080" /></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="1920"
+   height="1080"
+   id="svg236"
+   sodipodi:docname="background.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs240" />
+  <sodipodi:namedview
+     id="namedview238"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.33020833"
+     inkscape:cx="1141.7035"
+     inkscape:cy="634.44795"
+     inkscape:window-width="1920"
+     inkscape:window-height="1042"
+     inkscape:window-x="1080"
+     inkscape:window-y="1118"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg236" />
+  <path
+     d="m 810.00001,370 0,300 L 1110,520 z"
+     style="fill:#808080"
+     id="path232" />
+  <path
+     d="m 352,955 0,25 -302,0 0,50 302,0 0,25 50,0 0,-25 1468,0 0,-50 -1468,0 0,-25 -50,0 z"
+     style="fill:#808080"
+     id="path234" />
+</svg>

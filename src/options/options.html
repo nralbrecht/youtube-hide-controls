@@ -1,68 +1,144 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hide YouTube Fullscreen Controls - Options</title>
+        <title>Hide YouTube™ Fullscreen Controls - Options</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="options.css">
         <script defer type="text/javascript" src="options.js"></script>
     </head>
     <body>
-        <div class="setting no-border" id="triggerDistance">
-            <div class="preferences-info">
-                <div class="preferences-title">Trigger Distance</div>
-                <div class="preferences-description">The threshold, from each site, at wich the controls will be hidden.<br>All values in "px". Use "-1" to disable one site.</div>
+        <div class="section" id="general">
+            <div class="section-header">
+                <div class="section-title">General</div>
             </div>
-            <div class="preferences-input">
-                <div class="trigger-wrapper">
-                    <input type="number" name="Left" id="left" min="-1" step="1">
-                    <input type="number" name="Top" id="top" min="-1" step="1">
-                    <input type="number" name="Right" id="right" min="-1" step="1">
-                    <input type="number" name="Bottom" id="bottom" min="-1" step="1">
+            <div class="section-settings">
+                <div class="preference no-border" id="hideVideoOverlays">
+                    <label class="preference-header">
+                        <label class="switch">
+                            <input type="checkbox" name="hideVideoOverlays"/>
+                            <span class="slider"></span>
+                        </label>
+                        <div class="preference-title">Hide Video Overlays</div>
+                    </label>
+                    <div class="preference-input">
+                        <div class="preference-description">Hide most video overlays, including video recommendation cards at the end of a video and sponsored content notes. Subtitles will not be hidden.</div>
+                    </div>
+                </div>
+                <div class="preference" id="hidePlayPauseAnimation">
+                    <label class="preference-header">
+                        <label class="switch">
+                            <input type="checkbox" name="hidePlayPauseAnimation"/>
+                            <span class="slider"></span>
+                        </label>
+                        <div class="preference-title">Hide Play/Pause Animation</div>
+                    </label>
+                    <div class="preference-input">
+                        <div class="preference-description">Hide the animated center button when starting and stopping the video player.</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="setting" id="useHotkey">
-            <div class="preferences-info">
-                <div class="preferences-title">Use Hotkey</div>
-            </div>
-            <div class="preferences-input">
-                <input type="checkbox" name="useHotkey">
+
+        <div class="section" id="useMouse">
+            <label class="section-header">
+                <label class="switch">
+                    <input type="checkbox" name="useMouse"/>
+                    <span class="slider"></span>
+                </label>
+                <div class="section-title">Mouse Interaction</div>
+            </label>
+            <div class="section-settings">
+                <div class="preference no-border" id="preset">
+                    <div class="preference-header">
+                        <div class="preference-title">Preset</div>
+                    </div>
+                    <div class="preference-input">
+                        <div class="preference-description">Choose a preset of mouse interaction settings.</div>
+                        <div class="select">
+                            <select class="select-hidden">
+                                <option value="hide">Hide when mouse is at border</option>
+                                <option value="show">Show when mouse is over controls</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            <div class="select-styled">Hide when mouse is at border</div>
+                            <ul class="select-options">
+                                <li rel="hide">
+                                    <div class="title">Hide when mouse is at border</div>
+                                    <div class="description">Hide the controls when moving the mouse to the left or right border</div>
+                                </li>
+                                <li rel="show">
+                                    <div class="title">Show when mouse is over controls</div>
+                                    <div class="description">Show the controls only when moving the mouse over the bottom controls or to any border</div>
+                                </li>
+                                <li rel="custom">
+                                    <div class="title">Custom</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="preference" id="triggerDistance">
+                    <div class="preference-header">
+                        <div class="preference-title">Trigger Distance</div>
+                    </div>
+                    <div class="preference-input">
+                        <div class="preference-description">The threshold from each site at which the controls will be hidden.<br>All values are in pixel. Set the value to 0 pixels to disable interaction with the corresponding side. Disabled sides are colored red.</div>
+                        <div class="trigger-wrapper">
+                            <div class="trigger-inputs">
+                                <input type="number" name="Left" id="left" min="0" step="1">
+                                <input type="number" name="Top" id="top" min="0" step="1">
+                                <input type="number" name="Right" id="right" min="0" step="1">
+                                <input type="number" name="Bottom" id="bottom" min="0" step="1">
+                            </div>
+                            <div class="trigger-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preference" id="invertTrigger">
+                    <label class="preference-header">
+                        <label class="switch">
+                            <input type="checkbox" name="invertTrigger">
+                            <span class="slider"></span>
+                        </label>
+                        <div class="preference-title">Invert Trigger</div>
+                    </label>
+                    <div class="preference-input">
+                        <div class="preference-description">Inverts the function of the mouse trigger so that they make the controls visible instead of hiding them.</div>
+                    </div>
+                </div>
+                <div class="preference" id="onlyFullscreen">
+                    <label class="preference-header">
+                        <label class="switch">
+                            <input type="checkbox" name="onlyFullscreen">
+                            <span class="slider"></span>
+                        </label>
+                        <div class="preference-title">Only Fullscreen</div>
+                    </label>
+                    <div class="preference-input">
+                        <div class="preference-description">Only hide the controls when the YouTube™ video is in fullscreen mode.</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="setting" id="onlyHotkey">
-            <div class="preferences-info">
-                <div class="preferences-title">Only Hotkey</div>
-                <div class="preferences-description">Player controls can only be toggled via hotkey and mouse movement will be ignored.</div>
-            </div>
-            <div class="preferences-input">
-                <input type="checkbox" name="onlyHotkey">
-            </div>
-        </div>
-        <div class="setting" id="hotkey">
-            <div class="preferences-info">
-                <div class="preferences-title">Hotkey</div>
-                <div class="preferences-description">The hotkey that hides the controls.</div>
-            </div>
-            <div class="preferences-input">
-                <input type="text" name="hotkey" placeholder="None">
-            </div>
-        </div>
-        <div class="setting" id="invertTrigger">
-            <div class="preferences-info">
-                <div class="preferences-title">Invert Trigger</div>
-                <div class="preferences-description">Inverts the function of the hotkey and the mouse trigger so that they make the controls visible instead of hiding them. This also hides the full screen controls by default.<br>Try 70 as trigger distance for the top and bottom.</div>
-            </div>
-            <div class="preferences-input">
-                <input type="checkbox" name="invertTrigger">
-            </div>
-        </div>
-        <div class="setting" id="onlyFullscreen">
-            <div class="preferences-info">
-                <div class="preferences-title">Only Fullscreen</div>
-                <div class="preferences-description">Only hide the controls when the YouTube video is in fullscreen mode.</div>
-            </div>
-            <div class="preferences-input">
-                <input type="checkbox" name="onlyFullscreen">
+
+        <div class="section" id="useHotkey">
+            <label class="section-header">
+                <label class="switch">
+                    <input type="checkbox" name="useHotkey"/>
+                    <span class="slider"></span>
+                </label>
+                <div class="section-title">Hotkey</div>
+            </label>
+            <div class="section-settings">
+                <div class="preference no-border" id="hotkey">
+                    <div class="preference-header">
+                        <div class="preference-title">Hotkey</div>
+                    </div>
+                    <div class="preference-input">
+                        <div class="preference-description">The hotkey toggles the visibility of the video controls.<br>Note that mouse movement will reshow the controls even if you just pressed the hotkey. If you don't like that, consider disabling the mouse interaction.</div>
+                        <input type="text" name="hotkey" placeholder="None">
+                    </div>
+                </div>
             </div>
         </div>
     </body>

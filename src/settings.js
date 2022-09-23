@@ -1,21 +1,22 @@
 export class Settings {
-    constructor() {
+    constructor(onAfterInitCallback) {
         this.onChangeCallbacks = [];
 
-        this.triggerTop = -1;
+        this.triggerTop = 0;
         this.triggerLeft = 5;
         this.triggerRight = 5;
-        this.triggerBottom = -1;
+        this.triggerBottom = 0;
 
         this.hotkey = null;
         this.useHotkey = false;
-        this.onlyHotkey = false;
+        this.useMouse = false;
         this.invertTrigger = false;
         this.onlyFullscreen = true;
+        this.hideVideoOverlays = false;
+        this.hidePlayPauseAnimation = false;
 
-        chrome.storage.local.get(null, (result) => {
-            console.log(result);
-        });
+        this.migrateOldSettings(onAfterInitCallback);
+
         chrome.storage.local.get([
             "triggerTop",
             "triggerLeft",
@@ -23,31 +24,56 @@ export class Settings {
             "triggerBottom",
             "hotkey",
             "useHotkey",
-            "onlyHotkey",
+            "useMouse",
             "invertTrigger",
-            "onlyFullscreen"
+            "onlyFullscreen",
+            "hideVideoOverlays",
+            "hidePlayPauseAnimation",
         ], (result) => {
             for (let value in result) {
                 if (value in this) {
                     this[value] = result[value];
                 }
             }
+
+            if (onAfterInitCallback) {
+                onAfterInitCallback();
+            }
         });
 
         chrome.storage.onChanged.addListener((changes) => {
-            console.log(changes);
-
             let changedSomething = false;
-            for (let value in changes) {
-                if (value in this) {
-                    this[value] = changes[value].newValue;
+            for (let key in changes) {
+                if (key in this && changes[key].newValue !== this[key]) {
+                    this[key] = changes[key].newValue;
                     changedSomething = true;
                 }
             }
 
             if (changedSomething) {
-                for (let callback of this.onChangeCallbacks) {
-                    callback();
+                this.emitOnChange();
+            }
+        });
+    }
+
+    migrateOldSettings(didMigrateCallback) {
+        chrome.storage.local.get([
+            "onlyHotkey",
+        ], (result) => {
+            if ("onlyHotkey" in result) {
+                this.remove("onlyHotkey");
+
+                if (result["onlyHotkey"]) {
+                    this.set("useMouse", this.useMouse = false);
+                    this.set("useHotkey", this.useHotkey = true);
+                }
+                else {
+                    this.set("useMouse", this.useMouse = true);
+                    this.set("useHotkey", this.useHotkey = true);
+                }
+
+                if (didMigrateCallback) {
+                    didMigrateCallback();
                 }
             }
         });
@@ -56,5 +82,26 @@ export class Settings {
     addOnChangeListener(callback) {
         this.onChangeCallbacks.push(callback);
     }
+    emitOnChange() {
+        for (let callback of this.onChangeCallbacks) {
+            callback();
+        }
+    }
 
+    set(key, value, callback) {
+        if (value in this) {
+            this[key] = value;
+        }
+
+        chrome.storage.local.set({
+            [key]: value
+        });
+
+        if (callback) {
+            callback();
+        }
+    }
+    remove(key) {
+        browser.storage.local.remove(key);
+    }
 }

@@ -154,7 +154,7 @@ export class PlayerStateMachine {
         // switch from/to the inverted state when the "invertTrigger" setting changes
         for (let state in invertedDefinitions) {
             invertedDefinitions[state].transitions["settingsChanged"] = {
-                target: state.substr(0, state.length - "Inverted".length),
+                target: state.substring(0, state.length - "Inverted".length),
                 guard() {
                     return settings.invertTrigger;
                 }
@@ -193,7 +193,7 @@ export class PlayerStateMachine {
 
         destinationStateDefinition.actions.onEnter();
 
-        console.log(this.state, "=>", event, "=>", destinationState);
+        console.log("[youtube-hide-controls] event:", event, "transitioning: ", this.state, "=>", destinationState);
         this.state = destinationState;
         return this.state;
     }

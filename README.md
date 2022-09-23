@@ -16,6 +16,9 @@ In the add-on settings you can configure the individual sides as well as the hot
 
 If you experience any issues, please let me know [here](https://github.com/nralbrecht/youtube-hide-controls/issues).
 
+##### Known issues
+The add-on currently does not work with both embedded YouTube™ players and channel trailers.
+
 ## Building the add-on
 
 A build pipeline using Gulp is set up to create artifacts that are then able to be installed and published.
@@ -36,7 +39,7 @@ npm run build:firefox
 npm run build:chrome
 ```
 
-To debug the add-on see the respective documentation for [Google Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/) and [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
+The build output for Firefox and Chrome can be found in the `build` directory. To debug the add-on see the respective documentation for [Google Chrome](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/) and [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
 
 ### Legal Note
 YouTube™ is a trademark of Google Inc.
