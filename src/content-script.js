@@ -101,11 +101,11 @@ document.addEventListener("mousemove", function(e) {
 // handle hotkey
 document.addEventListener("keydown", function(e) {
     let hotkeyMatches = settings.useHotkey && settings.hotkey
-        && settings.hotkey.shiftKey == e.shiftKey
+        && settings.hotkey.code == e.code
+        && settings.hotkey.altKey == e.altKey
         && settings.hotkey.ctrlKey == e.ctrlKey
         && settings.hotkey.metaKey == e.metaKey
-        && settings.hotkey.altKey == e.altKey
-        && settings.hotkey.code == e.code;
+        && settings.hotkey.shiftKey == e.shiftKey;
 
     if (hotkeyMatches) {
         stateMachine.send("hotkey");

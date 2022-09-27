@@ -85,7 +85,6 @@ function updateDomWithSettings() {
 
     useHotkeyInput.checked = settings.useHotkey;
 
-
     invertTrigger.checked = settings.invertTrigger;
     onlyFullscreen.checked = settings.onlyFullscreen;
 
@@ -110,29 +109,35 @@ function updateTriggerVisualisation() {
     triggerOverlay.style.borderRightWidth = `${rightSize}px`;
     triggerOverlay.style.borderBottomWidth = `${bottomSize}px`;
 
-    if (invertTrigger.checked) {
-        triggerOverlay.style.backgroundColor = "#c8f1aa";
+    let backgroundColor;
+    let bottomTopBorderColor;
+    let leftRightBorderColor;
+    let disabledBorderColor = "red";
 
-        triggerOverlay.style.borderTopColor = "#f4f4f4";
-        triggerOverlay.style.borderLeftColor = "#e4e4e4";
-        triggerOverlay.style.borderRightColor = "#e4e4e4";
-        triggerOverlay.style.borderBottomColor = "#f4f4f4";
+    if (invertTrigger.checked) {
+        backgroundColor = "#c8f1aa";
+        bottomTopBorderColor = "#f4f4f4";
+        leftRightBorderColor = "#e4e4e4";
     }
     else {
-        triggerOverlay.style.backgroundColor = "transparent";
-
-        if (top <= 0) triggerOverlay.style.borderTopColor = "red";
-        else triggerOverlay.style.borderTopColor = "#c8f1aa";
-
-        if (left <= 0) triggerOverlay.style.borderLeftColor = "red";
-        else triggerOverlay.style.borderLeftColor = "#80bd55";
-
-        if (right <= 0) triggerOverlay.style.borderRightColor = "red";
-        else triggerOverlay.style.borderRightColor = "#80bd55";
-
-        if (bottom <= 0) triggerOverlay.style.borderBottomColor = "red";
-        else triggerOverlay.style.borderBottomColor = "#c8f1aa";
+        backgroundColor = "transparent";
+        bottomTopBorderColor = "#c8f1aa";
+        leftRightBorderColor = "#80bd55";
     }
+
+    triggerOverlay.style.backgroundColor = backgroundColor;
+
+    if (top <= 0) triggerOverlay.style.borderTopColor = disabledBorderColor;
+    else triggerOverlay.style.borderTopColor = bottomTopBorderColor;
+
+    if (left <= 0) triggerOverlay.style.borderLeftColor = disabledBorderColor;
+    else triggerOverlay.style.borderLeftColor = leftRightBorderColor;
+
+    if (right <= 0) triggerOverlay.style.borderRightColor = disabledBorderColor;
+    else triggerOverlay.style.borderRightColor = leftRightBorderColor;
+
+    if (bottom <= 0) triggerOverlay.style.borderBottomColor = disabledBorderColor;
+    else triggerOverlay.style.borderBottomColor = bottomTopBorderColor;
 }
 function updatePreset() {
     if (triggerTop.value == 0
@@ -164,14 +169,17 @@ function updatePreset() {
     }
 }
 
-const settings = new Settings(() => {
+const settings = new Settings();
+
+updateDomWithSettings();
+updateTriggerVisualisation();
+updatePreset();
+
+settings.init(() => {
     updateDomWithSettings();
     updateTriggerVisualisation();
     updatePreset();
 });
-updateDomWithSettings();
-updateTriggerVisualisation();
-updatePreset();
 
 function updateTriggerDistance(e) {
     if (e.target.validity.valid) {
