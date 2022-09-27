@@ -7,10 +7,6 @@ export class PlayerStateMachine {
             this.state = "shown";
         }
 
-        settings.addOnChangeListener(() => {
-            this.send("settingsChanged");
-        });
-
         const standartDefinitions = {
             hidden: {
                 actions: {

@@ -50,13 +50,13 @@ function updateClassNames() {
     });
 }
 
-const settings = new Settings(() => {
-    updateClassNames();
-});
-settings.addOnChangeListener(() => {
-    updateClassNames();
-});
+const settings = new Settings();
 const stateMachine = new PlayerStateMachine(showControls, hideControls, settings);
+settings.addOnChangeListener(() => {
+    stateMachine.send("settingsChanged");
+    updateClassNames();
+});
+settings.init();
 
 // handle fullscreen change
 function isFullscreen() {

@@ -1,5 +1,5 @@
 export class Settings {
-    constructor(onAfterInitCallback) {
+    constructor() {
         this.onChangeCallbacks = [];
 
         this.triggerTop = 0;
@@ -14,32 +14,6 @@ export class Settings {
         this.onlyFullscreen = true;
         this.hideVideoOverlays = false;
         this.hidePlayPauseAnimation = false;
-
-        this.migrateOldSettings(onAfterInitCallback);
-
-        chrome.storage.local.get([
-            "triggerTop",
-            "triggerLeft",
-            "triggerRight",
-            "triggerBottom",
-            "hotkey",
-            "useHotkey",
-            "useMouse",
-            "invertTrigger",
-            "onlyFullscreen",
-            "hideVideoOverlays",
-            "hidePlayPauseAnimation",
-        ], (result) => {
-            for (let value in result) {
-                if (value in this) {
-                    this[value] = result[value];
-                }
-            }
-
-            if (onAfterInitCallback) {
-                onAfterInitCallback();
-            }
-        });
 
         chrome.storage.onChanged.addListener((changes) => {
             let changedSomething = false;
@@ -72,10 +46,40 @@ export class Settings {
                     this.set("useHotkey", this.useHotkey = true);
                 }
 
-                if (didMigrateCallback) {
-                    didMigrateCallback();
-                }
             }
+
+            if (didMigrateCallback) {
+                didMigrateCallback();
+            }
+        });
+    }
+
+    init(initCallback) {
+        this.migrateOldSettings(() => {
+            chrome.storage.local.get([
+                "triggerTop",
+                "triggerLeft",
+                "triggerRight",
+                "triggerBottom",
+                "hotkey",
+                "useHotkey",
+                "useMouse",
+                "invertTrigger",
+                "onlyFullscreen",
+                "hideVideoOverlays",
+                "hidePlayPauseAnimation",
+            ], (result) => {
+                for (let key in result) {
+                    if (key in this) {
+                        this[key] = result[key];
+                    }
+                }
+
+                this.emitOnChange();
+                if (initCallback) {
+                    initCallback();
+                }
+            });
         });
     }
 
