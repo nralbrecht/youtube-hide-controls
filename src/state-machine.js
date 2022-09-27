@@ -106,7 +106,7 @@ export class PlayerStateMachine {
                 },
                 transitions: {
                     fullscreenEntered: {
-                        target: "shownFullscreenInverted",
+                        target: "hiddenFullscreenInverted",
                     },
                     hotkey: {
                         target: "hiddenInverted",
