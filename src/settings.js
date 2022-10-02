@@ -9,9 +9,9 @@ export class Settings {
 
         this.hotkey = null;
         this.useHotkey = false;
-        this.useMouse = false;
+        this.useMouse = true;
         this.invertTrigger = false;
-        this.onlyFullscreen = true;
+        this.onlyFullscreen = false;
         this.hideVideoOverlays = false;
         this.hidePlayPauseAnimation = false;
 
