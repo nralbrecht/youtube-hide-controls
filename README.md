@@ -17,7 +17,7 @@ In the add-on settings you can configure the individual sides as well as the hot
 If you experience any issues, please let me know [here](https://github.com/nralbrecht/youtube-hide-controls/issues).
 
 ##### Known issues
-The add-on currently does not work with both embedded YouTube™ players and channel trailers.
+The add-on currently does not work with embedded YouTube™ players.
 
 ## Building the add-on
 

@@ -1,8 +1,16 @@
 function getPlayerElement() {
-    // first search by id
-    const moviePlayer = document.getElementById("movie_player");
-    if (moviePlayer && moviePlayer.hideControls) {
-        return moviePlayer;
+    // first search by id depending on the opened page
+    if ("/watch" === location.pathname || /\/(shorts\/|live$)/.test(location.pathname)) {
+        const moviePlayer = document.getElementById("movie_player");
+        if (moviePlayer && moviePlayer.hideControls) {
+            return moviePlayer;
+        }
+    }
+    else if (/^\/(user|channel|c\/)/.test(location.pathname)) {
+        const c4Player = document.getElementById("c4-player");
+        if (c4Player && c4Player.hideControls) {
+            return c4Player;
+        }
     }
 
     // search by class
