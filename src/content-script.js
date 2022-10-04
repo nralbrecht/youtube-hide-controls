@@ -55,6 +55,7 @@ const stateMachine = new PlayerStateMachine(showControls, hideControls, settings
 settings.addOnChangeListener(() => {
     stateMachine.send("settingsChanged");
     updateClassNames();
+    onFullscreenChanged();
 });
 settings.init();
 
@@ -75,7 +76,6 @@ function onFullscreenChanged() {
     }
 }
 
-onFullscreenChanged();
 document.addEventListener("fullscreenchange", onFullscreenChanged);
 document.addEventListener("fullscreenerror", onFullscreenChanged);
 
