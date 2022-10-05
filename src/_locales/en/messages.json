@@ -71,7 +71,7 @@
         "description": "Title of the trigger distance option"
     },
     "triggerDistancePreferenceDescription": {
-        "message": "The threshold from each site at which the controls will be hidden.<br>All values are in pixel. Set the value to 0 pixels to disable interaction with the corresponding side. Disabled sides are colored red.",
+        "message": "The threshold from each side at which the controls will be hidden.<br>All values are in pixel. Set the value to 0 pixels to disable interaction with the corresponding side. Disabled sides are colored red.",
         "description": "Description of the trigger distance option"
     },
 
