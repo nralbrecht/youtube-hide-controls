@@ -23,7 +23,8 @@ function buildFirefox() {
             key: "version",
             value: version
         }))
-        .pipe(src(baseSourceFolder + "images/icon.svg"));
+        .pipe(src(baseSourceFolder + "images/icon.svg"))
+        .pipe(src(baseSourceFolder + "player.css"));
 
     const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({
@@ -52,7 +53,8 @@ function buildChrome() {
             key: "version",
             value: version
         }))
-        .pipe(src(baseSourceFolder + "images/icon_128.png"));
+        .pipe(src(baseSourceFolder + "images/icon_128.png"))
+        .pipe(src(baseSourceFolder + "player.css"));
 
     const scripts = src(baseSourceFolder + "**/*.js")
         .pipe(rollup({

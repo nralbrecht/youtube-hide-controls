@@ -10,14 +10,9 @@ script.addEventListener("load", function() {
 (document.head || document.documentElement).appendChild(script);
 
 // inject styles
-const style = document.createElement("style");
-style.innerText = `
-.hidePlayPauseAnimation .ytp-bezel,
-.hideVideoOverlays .annotation,
-.hideVideoOverlays .ytp-ce-element,
-.hideVideoOverlays .ytp-paid-content-overlay {
-    display: none; !important
-}`;
+const style = document.createElement("link");
+style.setAttribute("rel", "stylesheet");
+style.setAttribute("href", chrome.runtime.getURL("player.css"));
 (document.head || document.documentElement).appendChild(style);
 
 
@@ -111,3 +106,62 @@ document.addEventListener("keydown", function(e) {
         stateMachine.send("hotkey");
     }
 });
+
+// inject button to the addon option page
+function injectOptionButton() {
+    if (document.getElementById("hide-controls-options-button")) {
+        return;
+    }
+
+    const rightHeaderContainer = document.querySelector("ytd-masthead #end");
+
+    if (!rightHeaderContainer) {
+        setTimeout(() => injectOptionButton(), 1000);
+        return;
+    }
+
+    const iconContainer = document.createElement("yt-icon-button");
+    iconContainer.id = "hide-controls-options-button";
+    iconContainer.setAttribute("label", "Hide Control Options");
+    iconContainer.className = "style-scope ytd-masthead";
+
+    const iconElement = document.createElement("img");
+    iconElement.src = chrome.runtime.getURL("icon.svg");
+    iconElement.className = "style-scope ytd-masthead";
+    iconContainer.appendChild(iconElement);
+    rightHeaderContainer.prepend(iconContainer);
+
+    let optionPopupElement = document.getElementById("hide-controls-option-popup");
+    iconContainer.addEventListener("click", () => {
+        if (optionPopupElement) {
+            if (optionPopupElement.style.display === "none") {
+                optionPopupElement.style.display = "block";
+            }
+            else {
+                optionPopupElement.style.display = "none";
+            }
+        }
+        else {
+            optionPopupElement = document.createElement("iframe");
+
+            optionPopupElement.src = chrome.runtime.getURL("options/options.html");
+            optionPopupElement.id = "hide-controls-option-popup";
+
+            document.body.appendChild(optionPopupElement);
+            document.addEventListener("keydown", (event) => {
+                if ("Escape" === event.key) {
+                    optionPopupElement.style.display = "none";
+                }
+            });
+            document.addEventListener("click", (event) => {
+                if (optionPopupElement.style.display !== "none"
+                    && !iconContainer.contains(event.target)
+                    && !optionPopupElement.contains(event.target)
+                ) {
+                    optionPopupElement.style.display = "none";
+                }
+            });
+        }
+    });
+}
+injectOptionButton();
