@@ -13,6 +13,15 @@
         "description": "Title of the general section"
     },
 
+    "injectOptionButtonPreferenceTitle": {
+        "message": "Show option button on YouTube™",
+        "description": "Title of the inject option button option"
+    },
+    "injectOptionButtonPreferenceDescription": {
+        "message": "Show an button on any YouTube™ page in the top right menu to access the addon options. The options can allways be accessed via the addon entry of the installed browser addon list.",
+        "description": "Description of the inject option button option"
+    },
+
     "hideVideoOverlaysPreferenceTitle": {
         "message": "Hide Video Overlays",
         "description": "Title of the hide video overlays option"

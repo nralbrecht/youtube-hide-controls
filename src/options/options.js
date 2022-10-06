@@ -1,5 +1,6 @@
 import { Settings } from "../settings";
 
+let injectOptionButtonInput = document.querySelector("#injectOptionButton input");
 let hideVideoOverlaysInput = document.querySelector("#hideVideoOverlays input");
 let hidePlayPauseAnimationInput = document.querySelector("#hidePlayPauseAnimation input");
 
@@ -88,6 +89,7 @@ function updateDomWithSettings() {
     invertTrigger.checked = settings.invertTrigger;
     onlyFullscreen.checked = settings.onlyFullscreen;
 
+    injectOptionButtonInput.checked = settings.injectOptionButton;
     hideVideoOverlaysInput.checked = settings.hideVideoOverlays;
     hidePlayPauseAnimationInput.checked = settings.hidePlayPauseAnimation;
 
@@ -195,6 +197,9 @@ triggerLeft.addEventListener("input", updateTriggerDistance);
 triggerRight.addEventListener("input", updateTriggerDistance);
 triggerBottom.addEventListener("input", updateTriggerDistance);
 
+injectOptionButtonInput.addEventListener("click", () => {
+    settings.set("injectOptionButton", injectOptionButtonInput.checked);
+});
 hideVideoOverlaysInput.addEventListener("click", () => {
     settings.set("hideVideoOverlays", hideVideoOverlaysInput.checked);
 });
@@ -338,6 +343,8 @@ document.addEventListener("click", () => {
 
 
 document.querySelector("#general .section-title").innerText = chrome.i18n.getMessage("generalSectionTitle");
+document.querySelector("#injectOptionButton .preference-title").innerText = chrome.i18n.getMessage("injectOptionButtonPreferenceTitle");
+document.querySelector("#injectOptionButton .preference-description").innerText = chrome.i18n.getMessage("injectOptionButtonPreferenceDescription");
 document.querySelector("#hideVideoOverlays .preference-title").innerText = chrome.i18n.getMessage("hideVideoOverlaysPreferenceTitle");
 document.querySelector("#hideVideoOverlays .preference-description").innerText = chrome.i18n.getMessage("hideVideoOverlaysPreferenceDescription");
 document.querySelector("#hidePlayPauseAnimation .preference-title").innerText = chrome.i18n.getMessage("hidePlayPauseAnimationPreferenceTitle");

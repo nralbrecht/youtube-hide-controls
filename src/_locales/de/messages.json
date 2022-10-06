@@ -13,6 +13,15 @@
         "description": "Title of the general section"
     },
 
+    "injectOptionButtonPreferenceTitle": {
+        "message": "Knopf für Add-on Option auf YouTube™",
+        "description": "Title of the inject option button option"
+    },
+    "injectOptionButtonPreferenceDescription": {
+        "message": "Zeige einen Knopf im oberen rechten YouTube™-Menü an, welcher ein Pop-up mit den Add-on-Optionen öffnet. Die Optionen können immer über den Eintrag in der Liste der installierten Add-ons des Browsers geändert werden.",
+        "description": "Description of the inject option button option"
+    },
+
     "hideVideoOverlaysPreferenceTitle": {
         "message": "Verstecke Video Overlays",
         "description": "Title of the hide video overlays option"

@@ -51,6 +51,7 @@ settings.addOnChangeListener(() => {
     stateMachine.send("settingsChanged");
     updateClassNames();
     onFullscreenChanged();
+    updateInjectedOptionButton();
 });
 settings.init();
 
@@ -108,31 +109,40 @@ document.addEventListener("keydown", function(e) {
 });
 
 // inject button to the addon option page
-function injectOptionButton() {
-    if (document.getElementById("hide-controls-options-button")) {
+function updateInjectedOptionButton() {
+    let optionButtonContainer = document.getElementById("hide-controls-options-button");
+
+    if (optionButtonContainer && !settings.injectOptionButton) {
+        // remove if option changed
+        optionButtonContainer.style.display = "none";
+        return;
+    }
+    else if (optionButtonContainer) {
+        // ignore if allready injected
+        optionButtonContainer.style.display = "block";
         return;
     }
 
     const rightHeaderContainer = document.querySelector("ytd-masthead #end");
 
     if (!rightHeaderContainer) {
-        setTimeout(() => injectOptionButton(), 1000);
+        setTimeout(() => updateInjectedOptionButton(), 1000);
         return;
     }
 
-    const iconContainer = document.createElement("yt-icon-button");
-    iconContainer.id = "hide-controls-options-button";
-    iconContainer.setAttribute("label", "Hide Control Options");
-    iconContainer.className = "style-scope ytd-masthead";
+    optionButtonContainer = document.createElement("yt-icon-button");
+    optionButtonContainer.id = "hide-controls-options-button";
+    optionButtonContainer.setAttribute("label", "Hide Control Options");
+    optionButtonContainer.className = "style-scope ytd-masthead";
 
     const iconElement = document.createElement("img");
     iconElement.src = chrome.runtime.getURL("icon.svg");
     iconElement.className = "style-scope ytd-masthead";
-    iconContainer.appendChild(iconElement);
-    rightHeaderContainer.prepend(iconContainer);
+    optionButtonContainer.appendChild(iconElement);
+    rightHeaderContainer.prepend(optionButtonContainer);
 
     let optionPopupElement = document.getElementById("hide-controls-option-popup");
-    iconContainer.addEventListener("click", () => {
+    optionButtonContainer.addEventListener("click", () => {
         if (optionPopupElement) {
             if (optionPopupElement.style.display === "none") {
                 optionPopupElement.style.display = "block";
@@ -155,7 +165,7 @@ function injectOptionButton() {
             });
             document.addEventListener("click", (event) => {
                 if (optionPopupElement.style.display !== "none"
-                    && !iconContainer.contains(event.target)
+                    && !optionButtonContainer.contains(event.target)
                     && !optionPopupElement.contains(event.target)
                 ) {
                     optionPopupElement.style.display = "none";
@@ -164,4 +174,3 @@ function injectOptionButton() {
         }
     });
 }
-injectOptionButton();

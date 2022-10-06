@@ -2,6 +2,8 @@ export class Settings {
     constructor() {
         this.onChangeCallbacks = [];
 
+        this.injectOptionButton = true;
+
         this.triggerTop = 0;
         this.triggerLeft = 5;
         this.triggerRight = 5;
@@ -57,6 +59,7 @@ export class Settings {
     init(initCallback) {
         this.migrateOldSettings(() => {
             chrome.storage.local.get([
+                "injectOptionButton",
                 "triggerTop",
                 "triggerLeft",
                 "triggerRight",

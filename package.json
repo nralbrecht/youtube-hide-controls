@@ -2,7 +2,7 @@
     "name": "youtube-hide-controls",
     "description": "Hide the YouTube fullscreen controls when you move the cursor to the display border",
     "homepage": "https://github.com/nralbrecht/youtube-hide-controls",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "scripts": {
         "build": "gulp",
         "watch": "gulp watch",
