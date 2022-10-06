@@ -117,6 +117,9 @@ function updateInjectedOptionButton() {
         optionButtonContainer.style.display = "none";
         return;
     }
+    else if (!optionButtonContainer && !settings.injectOptionButton) {
+        return;
+    }
     else if (optionButtonContainer) {
         // ignore if allready injected
         optionButtonContainer.style.display = "block";
