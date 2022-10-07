@@ -18,7 +18,7 @@
         "description": "Title of the inject option button option"
     },
     "injectOptionButtonPreferenceDescription": {
-        "message": "Show an button on any YouTube™ page in the top right menu to access the addon options. The options can allways be accessed via the addon entry of the installed browser addon list.",
+        "message": "Show a button on any YouTube™ page in the top right menu to access the addon options. The options can allways be accessed via the addon entry of the installed browser addon list.",
         "description": "Description of the inject option button option"
     },
 
@@ -27,7 +27,7 @@
         "description": "Title of the hide video overlays option"
     },
     "hideVideoOverlaysPreferenceDescription": {
-        "message": "Hide most video overlays including video recomendation cards at the end of a video and sponsored content note. Subtitles will not be hidden.",
+        "message": "Hide most video overlays including video recommendation cards at the end of a video and sponsored content note. Subtitles will not be hidden.",
         "description": "Description of the hide video overlays option"
     },
 
