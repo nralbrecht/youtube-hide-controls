@@ -4,7 +4,8 @@ const zip = require("gulp-zip");
 const rename = require("gulp-rename");
 const mergeStream = require("merge-stream");
 const jsonModify = require("gulp-json-modify");
-const rollup = require('gulp-rollup');
+const rollup = require("gulp-rollup");
+const _7z = require("7zip-min");
 
 const version = require("./package.json").version;
 const baseSourceFolder = "src/";
@@ -37,9 +38,20 @@ function buildFirefox() {
     const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
 
     return mergeStream(singleFiles, scripts, directories)
-        .pipe(dest(outputFolderFirefox))
-        .pipe(zip("youtube-hide-controls_firefox_" + version + ".zip"))
-        .pipe(dest(baseOutputFolder));
+        .pipe(dest(outputFolderFirefox));
+}
+
+function packageFirefox() {
+    return new Promise((resolve, reject) => {
+        _7z.pack(`./${outputFolderFirefox}/*`, `${baseOutputFolder}/youtube-hide-controls_firefox_${version}.zip`, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
 }
 
 function cleanChrome() {
@@ -67,9 +79,20 @@ function buildChrome() {
     const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
 
     return mergeStream(singleFiles, scripts, directories)
-        .pipe(dest(outputFolderChrome))
-        .pipe(zip("youtube-hide-controls_chrome_" + version + ".zip"))
-        .pipe(dest(baseOutputFolder));
+        .pipe(dest(outputFolderChrome));
+}
+
+function packageChrome() {
+    return new Promise((resolve, reject) => {
+        _7z.pack(`./${outputFolderChrome}/*`, `${baseOutputFolder}/youtube-hide-controls_chrome_${version}.zip`, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
 }
 
 function watchAllCodeFiles() {
@@ -83,10 +106,10 @@ function watchAllCodeFiles() {
     ], parallel(firefox, chrome));
 }
 
-const firefox = series(cleanFirefox, buildFirefox);
+const firefox = series(cleanFirefox, buildFirefox, packageFirefox);
 exports.firefox = firefox;
 
-const chrome = series(cleanChrome, buildChrome);
+const chrome = series(cleanChrome, buildChrome, packageChrome);
 exports.chrome = chrome;
 
 exports.watch = watchAllCodeFiles;
