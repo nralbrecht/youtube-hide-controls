@@ -1,0 +1,30 @@
+name: Build and create release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tagged-release:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: NPM install
+        run: npm clean-install
+      -
+        name: NPM build
+        run: npm run build
+      -
+        name: Tagged Release
+        id: release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: true
+          prerelease: false
+          title: YouTube Hide Controls ${{ github.ref_name }}
+          files: build/*.zip
