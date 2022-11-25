@@ -15,7 +15,7 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources": [ "player.js" ],
+        "resources": [ "player.js", "player.css", "icon.svg", "options/options.html" ],
         "matches": [ "*://*.youtube.com/*" ]
     }],
     "options_ui": {
