@@ -18,7 +18,7 @@
         "description": "Title of the inject option button option"
     },
     "injectOptionButtonPreferenceDescription": {
-        "message": "Show a button on any YouTube™ page in the top right menu to access the addon options. The options can allways be accessed via the addon entry of the installed browser addon list.",
+        "message": "Show a button on any YouTube™ page in the top right menu to access the addon options. The options can always be accessed via the addon entry of the installed browser addon list.",
         "description": "Description of the inject option button option"
     },
 
