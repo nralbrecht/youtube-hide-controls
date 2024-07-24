@@ -1,4 +1,4 @@
-import { Settings } from "../settings";
+import { Settings } from "../../components/settings";
 
 let injectOptionButtonInput = document.querySelector(
   "#injectOptionButton input"
