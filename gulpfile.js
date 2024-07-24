@@ -14,97 +14,128 @@ const outputFolderFirefox = baseOutputFolder + "/firefox";
 const outputFolderChrome = baseOutputFolder + "/chrome";
 
 function cleanFirefox() {
-    return del(outputFolderFirefox, {force: true});
+  return del(outputFolderFirefox, { force: true });
 }
 
 function buildFirefox() {
-    const singleFiles = src(baseSourceFolder + "manifest_firefox.json")
-        .pipe(rename("manifest.json"))
-        .pipe(jsonModify({
-            key: "version",
-            value: version
-        }))
-        .pipe(src(baseSourceFolder + "images/icon.svg"))
-        .pipe(src(baseSourceFolder + "player.css"));
+  const singleFiles = src(baseSourceFolder + "manifest_firefox.json")
+    .pipe(rename("manifest.json"))
+    .pipe(
+      jsonModify({
+        key: "version",
+        value: version,
+      })
+    )
+    .pipe(src(baseSourceFolder + "images/icon.svg"))
+    .pipe(src(baseSourceFolder + "player.css"));
 
-    const scripts = src(baseSourceFolder + "**/*.js")
-        .pipe(rollup({
-            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js", baseSourceFolder + "options/options.js"],
-            output: {
-                format: "esm"
-            }
-        }));
+  const scripts = src(baseSourceFolder + "**/*.js").pipe(
+    rollup({
+      input: [
+        baseSourceFolder + "content-script.js",
+        baseSourceFolder + "player.js",
+        baseSourceFolder + "options/options.js",
+      ],
+      output: {
+        format: "esm",
+      },
+    })
+  );
 
-    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
+  const directories = src(
+    [baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"],
+    { base: "./src/" }
+  );
 
-    return mergeStream(singleFiles, scripts, directories)
-        .pipe(dest(outputFolderFirefox));
+  return mergeStream(singleFiles, scripts, directories).pipe(
+    dest(outputFolderFirefox)
+  );
 }
 
 function packageFirefox() {
-    return new Promise((resolve, reject) => {
-        _7z.pack(`./${outputFolderFirefox}/*`, `${baseOutputFolder}/youtube-hide-controls_firefox_${version}.zip`, (err) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve();
-            }
-        });
-    });
+  return new Promise((resolve, reject) => {
+    _7z.pack(
+      `./${outputFolderFirefox}/*`,
+      `${baseOutputFolder}/youtube-hide-controls_firefox_${version}.zip`,
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      }
+    );
+  });
 }
 
 function cleanChrome() {
-    return del(outputFolderChrome, {force: true});
+  return del(outputFolderChrome, { force: true });
 }
 
 function buildChrome() {
-    const singleFiles = src(baseSourceFolder + "manifest_chrome.json")
-        .pipe(rename("manifest.json"))
-        .pipe(jsonModify({
-            key: "version",
-            value: version
-        }))
-        .pipe(src(baseSourceFolder + "images/icon_128.png"))
-        .pipe(src(baseSourceFolder + "images/icon.svg"))
-        .pipe(src(baseSourceFolder + "player.css"));
+  const singleFiles = src(baseSourceFolder + "manifest_chrome.json")
+    .pipe(rename("manifest.json"))
+    .pipe(
+      jsonModify({
+        key: "version",
+        value: version,
+      })
+    )
+    .pipe(src(baseSourceFolder + "images/icon_128.png"))
+    .pipe(src(baseSourceFolder + "images/icon.svg"))
+    .pipe(src(baseSourceFolder + "player.css"));
 
-    const scripts = src(baseSourceFolder + "**/*.js")
-        .pipe(rollup({
-            input: [baseSourceFolder + "content-script.js", baseSourceFolder + "player.js", baseSourceFolder + "options/options.js"],
-            output: {
-                format: "esm"
-            }
-        }));
+  const scripts = src(baseSourceFolder + "**/*.js").pipe(
+    rollup({
+      input: [
+        baseSourceFolder + "content-script.js",
+        baseSourceFolder + "player.js",
+        baseSourceFolder + "options/options.js",
+      ],
+      output: {
+        format: "esm",
+      },
+    })
+  );
 
-    const directories = src([baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"], {base: "./src/"});
+  const directories = src(
+    [baseSourceFolder + "options/**/*", baseSourceFolder + "_locales/**/*"],
+    { base: "./src/" }
+  );
 
-    return mergeStream(singleFiles, scripts, directories)
-        .pipe(dest(outputFolderChrome));
+  return mergeStream(singleFiles, scripts, directories).pipe(
+    dest(outputFolderChrome)
+  );
 }
 
 function packageChrome() {
-    return new Promise((resolve, reject) => {
-        _7z.pack(`./${outputFolderChrome}/*`, `${baseOutputFolder}/youtube-hide-controls_chrome_${version}.zip`, (err) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve();
-            }
-        });
-    });
+  return new Promise((resolve, reject) => {
+    _7z.pack(
+      `./${outputFolderChrome}/*`,
+      `${baseOutputFolder}/youtube-hide-controls_chrome_${version}.zip`,
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      }
+    );
+  });
 }
 
 function watchAllCodeFiles() {
-    return watch([
-        baseSourceFolder + "manifest_chrome.json",
-        baseSourceFolder + "manifest_firefox.json",
-        baseSourceFolder + "content-script.js",
-        baseSourceFolder + "settings.js",
-        baseSourceFolder + "player.js",
-        baseSourceFolder + "options/*"
-    ], parallel(firefox, chrome));
+  return watch(
+    [
+      baseSourceFolder + "manifest_chrome.json",
+      baseSourceFolder + "manifest_firefox.json",
+      baseSourceFolder + "content-script.js",
+      baseSourceFolder + "settings.js",
+      baseSourceFolder + "player.js",
+      baseSourceFolder + "options/*",
+    ],
+    parallel(firefox, chrome)
+  );
 }
 
 const firefox = series(cleanFirefox, buildFirefox, packageFirefox);
@@ -115,7 +146,4 @@ exports.chrome = chrome;
 
 exports.watch = watchAllCodeFiles;
 
-exports.default = parallel(
-    chrome,
-    firefox
-);
+exports.default = parallel(chrome, firefox);

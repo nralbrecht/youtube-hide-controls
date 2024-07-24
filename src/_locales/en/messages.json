@@ -1,122 +1,110 @@
 {
-    "extensionName": {
-        "message": "Hide YouTube™ Fullscreen Controls",
-        "description": "Name of the extension"
-    },
-    "extensionDescription": {
-        "message": "Hide the YouTube™ fullscreen controls with the press of a hotkey or when you move the cursor to the display border.",
-        "description": "Description of the extension"
-    },
-
-    "generalSectionTitle": {
-        "message": "General",
-        "description": "Title of the general section"
-    },
-
-    "injectOptionButtonPreferenceTitle": {
-        "message": "Show option button on YouTube™",
-        "description": "Title of the inject option button option"
-    },
-    "injectOptionButtonPreferenceDescription": {
-        "message": "Show a button on any YouTube™ page in the top right menu to access the addon options. The options can always be accessed via the addon entry of the installed browser addon list.",
-        "description": "Description of the inject option button option"
-    },
-
-    "hideVideoOverlaysPreferenceTitle": {
-        "message": "Hide Video Overlays",
-        "description": "Title of the hide video overlays option"
-    },
-    "hideVideoOverlaysPreferenceDescription": {
-        "message": "Hide most video overlays including video recommendation cards at the end of a video and sponsored content note. Subtitles will not be hidden.",
-        "description": "Description of the hide video overlays option"
-    },
-
-    "hidePlayPauseAnimationPreferenceTitle": {
-        "message": "Hide Play/Pause Animation",
-        "description": "Title of the hide play pause animation option"
-    },
-    "hidePlayPauseAnimationPreferenceDescription": {
-        "message": "Hide the animated center button that is displayed when starting and stopping the video player.",
-        "description": "Description of the hide play pause animation option"
-    },
-
-    "useMouseSectionTitle": {
-        "message": "Mouse Interaction",
-        "description": "Title of the mouse interaction section"
-    },
-
-    "presetPreferenceTitle": {
-        "message": "Preset",
-        "description": "Title of the preset option"
-    },
-    "presetPreferenceDescription": {
-        "message": "Choose a preset of mouse interaction settings.",
-        "description": "Description of the preset option"
-    },
-
-    "presetDropdownHideTitle": {
-        "message": "Hide when mouse is at border",
-        "description": "Title of the 'hide' entry in the preset dropdown"
-    },
-    "presetDropdownHideDescription": {
-        "message": "Hide the controls when moving the mouse to the left or right border",
-        "description": "Description of the 'hide' entry in the preset dropdown"
-    },
-    "presetDropdownShowTitle": {
-        "message": "Show when mouse is over controls",
-        "description": "Title of the 'show' entry in the preset dropdown"
-    },
-    "presetDropdownShowDescription": {
-        "message": "Show the controls only when moving the mouse over the bottom controls or to any border",
-        "description": "Description of the 'show' entry in the preset dropdown"
-    },
-    "presetDropdownCustomTitle": {
-        "message": "Custom",
-        "description": "Title of the 'custom' entry in the preset dropdown"
-    },
-
-    "triggerDistancePreferenceTitle": {
-        "message": "Trigger Distance",
-        "description": "Title of the trigger distance option"
-    },
-    "triggerDistancePreferenceDescription": {
-        "message": "The threshold from each side at which the controls will be hidden.<br>All values are in pixel. Set the value to 0 pixels to disable interaction with the corresponding side. Disabled sides are colored red.",
-        "description": "Description of the trigger distance option"
-    },
-
-    "invertTriggerPreferenceTitle": {
-        "message": "Invert Trigger",
-        "description": "Title of the invert trigger option"
-    },
-    "invertTriggerPreferenceDescription": {
-        "message": "Inverts the function of the mouse trigger so that they make the controls visible instead of hiding them.",
-        "description": "Description of the invert trigger option"
-    },
-
-    "onlyFullscreenPreferenceTitle": {
-        "message": "Only Fullscreen",
-        "description": "Title of the only fullscreen option"
-    },
-    "onlyFullscreenPreferenceDescription": {
-        "message": "Only hide the controls when the YouTube™ video is in fullscreen mode.",
-        "description": "Description of the only fullscreen option"
-    },
-
-    "useHotkeySectionTitle": {
-        "message": "Hotkey",
-        "description": "Title of the hotkey usage section"
-    },
-
-    "hotkeyPreferenceTitle": {
-        "message": "Hotkey",
-        "description": "Title of the hotkey option"
-    },
-    "hotkeyPreferenceDescription": {
-        "message": "The hotkey toggles the visibility of the video controls.<br>Note that mouse movement will reshow the controls even if you just pressed the hotkey. If you don't like that, consider disabling the mouse interaction.",
-        "description": "Description of the hotkey option"
-    },
-    "hotkeyPreferencePlaceholder": {
-        "message": "None",
-        "description": "Hotkey input placeholder text"
-    }
+  "extensionName": {
+    "message": "Hide YouTube™ Fullscreen Controls",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Hide the YouTube™ fullscreen controls with the press of a hotkey or when you move the cursor to the display border.",
+    "description": "Description of the extension"
+  },
+  "generalSectionTitle": {
+    "message": "General",
+    "description": "Title of the general section"
+  },
+  "injectOptionButtonPreferenceTitle": {
+    "message": "Show option button on YouTube™",
+    "description": "Title of the inject option button option"
+  },
+  "injectOptionButtonPreferenceDescription": {
+    "message": "Show a button on any YouTube™ page in the top right menu to access the addon options. The options can always be accessed via the addon entry of the installed browser addon list.",
+    "description": "Description of the inject option button option"
+  },
+  "hideVideoOverlaysPreferenceTitle": {
+    "message": "Hide Video Overlays",
+    "description": "Title of the hide video overlays option"
+  },
+  "hideVideoOverlaysPreferenceDescription": {
+    "message": "Hide most video overlays including video recommendation cards at the end of a video and sponsored content note. Subtitles will not be hidden.",
+    "description": "Description of the hide video overlays option"
+  },
+  "hidePlayPauseAnimationPreferenceTitle": {
+    "message": "Hide Play/Pause Animation",
+    "description": "Title of the hide play pause animation option"
+  },
+  "hidePlayPauseAnimationPreferenceDescription": {
+    "message": "Hide the animated center button that is displayed when starting and stopping the video player.",
+    "description": "Description of the hide play pause animation option"
+  },
+  "useMouseSectionTitle": {
+    "message": "Mouse Interaction",
+    "description": "Title of the mouse interaction section"
+  },
+  "presetPreferenceTitle": {
+    "message": "Preset",
+    "description": "Title of the preset option"
+  },
+  "presetPreferenceDescription": {
+    "message": "Choose a preset of mouse interaction settings.",
+    "description": "Description of the preset option"
+  },
+  "presetDropdownHideTitle": {
+    "message": "Hide when mouse is at border",
+    "description": "Title of the 'hide' entry in the preset dropdown"
+  },
+  "presetDropdownHideDescription": {
+    "message": "Hide the controls when moving the mouse to the left or right border",
+    "description": "Description of the 'hide' entry in the preset dropdown"
+  },
+  "presetDropdownShowTitle": {
+    "message": "Show when mouse is over controls",
+    "description": "Title of the 'show' entry in the preset dropdown"
+  },
+  "presetDropdownShowDescription": {
+    "message": "Show the controls only when moving the mouse over the bottom controls or to any border",
+    "description": "Description of the 'show' entry in the preset dropdown"
+  },
+  "presetDropdownCustomTitle": {
+    "message": "Custom",
+    "description": "Title of the 'custom' entry in the preset dropdown"
+  },
+  "triggerDistancePreferenceTitle": {
+    "message": "Trigger Distance",
+    "description": "Title of the trigger distance option"
+  },
+  "triggerDistancePreferenceDescription": {
+    "message": "The threshold from each side at which the controls will be hidden.<br>All values are in pixel. Set the value to 0 pixels to disable interaction with the corresponding side. Disabled sides are colored red.",
+    "description": "Description of the trigger distance option"
+  },
+  "invertTriggerPreferenceTitle": {
+    "message": "Invert Trigger",
+    "description": "Title of the invert trigger option"
+  },
+  "invertTriggerPreferenceDescription": {
+    "message": "Inverts the function of the mouse trigger so that they make the controls visible instead of hiding them.",
+    "description": "Description of the invert trigger option"
+  },
+  "onlyFullscreenPreferenceTitle": {
+    "message": "Only Fullscreen",
+    "description": "Title of the only fullscreen option"
+  },
+  "onlyFullscreenPreferenceDescription": {
+    "message": "Only hide the controls when the YouTube™ video is in fullscreen mode.",
+    "description": "Description of the only fullscreen option"
+  },
+  "useHotkeySectionTitle": {
+    "message": "Hotkey",
+    "description": "Title of the hotkey usage section"
+  },
+  "hotkeyPreferenceTitle": {
+    "message": "Hotkey",
+    "description": "Title of the hotkey option"
+  },
+  "hotkeyPreferenceDescription": {
+    "message": "The hotkey toggles the visibility of the video controls.<br>Note that mouse movement will reshow the controls even if you just pressed the hotkey. If you don't like that, consider disabling the mouse interaction.",
+    "description": "Description of the hotkey option"
+  },
+  "hotkeyPreferencePlaceholder": {
+    "message": "None",
+    "description": "Hotkey input placeholder text"
+  }
 }

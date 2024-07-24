@@ -9,17 +9,13 @@ jobs:
   tagged-release:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: NPM install
+      - name: NPM install
         run: npm clean-install
-      -
-        name: NPM build
+      - name: NPM build
         run: npm run build
-      -
-        name: Tagged Release
+      - name: Tagged Release
         id: release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
