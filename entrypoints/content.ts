@@ -1,12 +1,15 @@
-import { Settings } from "~/components/settings.js";
-import { PlayerStateMachine } from "~/components/state-machine.js";
+import { doesEventMatchHotkey } from "@/utils/hotkey";
+import { Settings } from "@/utils/settings.js";
+import injectStyleUrl from "~/assets/inject.css?url";
+import icon from "~/public/icon.svg";
+import { PlayerStateMachine } from "~/utils/state-machine.js";
 
 export default defineContentScript({
-  matches: ['*://*.google.com/*'],
-  main() {
+  matches: ["*://www.youtube.com/*"],
+  main(): void {
     // inject player script
     const script = document.createElement("script");
-    script.setAttribute("src", chrome.runtime.getURL("player.js"));
+    script.setAttribute("src", browser.runtime.getURL("/inject.js"));
     script.addEventListener("load", function () {
       this.remove();
     });
@@ -15,10 +18,10 @@ export default defineContentScript({
     // inject styles
     const style = document.createElement("link");
     style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", chrome.runtime.getURL("player.css"));
+    style.setAttribute("href", injectStyleUrl);
     (document.head || document.documentElement).appendChild(style);
 
-    function hideControls() {
+    function hideControls(): void {
       console.log("[youtube-hide-controls] HIDE_PLAYER!", settings);
       window.postMessage({
         source: "YOUTUBE_HIDE_CONTROL",
@@ -26,7 +29,7 @@ export default defineContentScript({
       });
     }
 
-    function showControls() {
+    function showControls(): void {
       console.log("[youtube-hide-controls] SHOW_PLAYER!", settings);
       window.postMessage({
         source: "YOUTUBE_HIDE_CONTROL",
@@ -34,7 +37,7 @@ export default defineContentScript({
       });
     }
 
-    function updateClassNames() {
+    function updateClassNames(): void {
       window.postMessage({
         source: "YOUTUBE_HIDE_CONTROL",
         action: "HIDE_VIDEO_OVERLAYS",
@@ -48,28 +51,23 @@ export default defineContentScript({
     }
 
     const settings = new Settings();
-    const stateMachine = new PlayerStateMachine(
-      showControls,
-      hideControls,
-      settings
-    );
+    const stateMachine = new PlayerStateMachine(showControls, hideControls, settings);
     settings.addOnChangeListener(() => {
       stateMachine.send("settingsChanged");
       updateClassNames();
       onFullscreenChanged();
       updateInjectedOptionButton();
     });
-    settings.init();
 
     // handle fullscreen change
-    function isFullscreen() {
+    function isFullscreen(): boolean {
       if (settings.onlyFullscreen) {
         return Boolean(document.fullscreenElement);
       }
       return true;
     }
 
-    function onFullscreenChanged() {
+    function onFullscreenChanged(): void {
       if (isFullscreen()) {
         stateMachine.send("fullscreenEntered");
       } else {
@@ -81,16 +79,21 @@ export default defineContentScript({
     document.addEventListener("fullscreenerror", onFullscreenChanged);
 
     // handle mouse tigger zone
-    document.addEventListener("mousemove", function (e) {
+    document.addEventListener("mousemove", async (event) => {
       if (!settings.useMouse) {
         return;
       }
 
-      let mouseIsInTriggerZone =
-        e.clientX < settings.triggerLeft ||
-        e.clientY < settings.triggerTop ||
-        document.documentElement.clientWidth - e.clientX < settings.triggerRight ||
-        document.documentElement.clientHeight - e.clientY < settings.triggerBottom;
+      const triggerLeft = await settings.triggerLeft.getValue();
+      const triggerTop = await settings.triggerTop.getValue();
+      const triggerRight = await settings.triggerRight.getValue();
+      const triggerBottom = await settings.triggerBottom.getValue();
+
+      const mouseIsInTriggerZone =
+        event.clientX < triggerLeft ||
+        event.clientY < triggerTop ||
+        document.documentElement.clientWidth - event.clientX < triggerRight ||
+        document.documentElement.clientHeight - event.clientY < triggerBottom;
 
       if (mouseIsInTriggerZone) {
         stateMachine.send("mouseTriggerZoneEntered");
@@ -100,26 +103,27 @@ export default defineContentScript({
     });
 
     // handle hotkey
-    document.addEventListener("keydown", function (e) {
-      let hotkeyMatches =
-        settings.useHotkey &&
-        settings.hotkey &&
-        settings.hotkey.code == e.code &&
-        settings.hotkey.altKey == e.altKey &&
-        settings.hotkey.ctrlKey == e.ctrlKey &&
-        settings.hotkey.metaKey == e.metaKey &&
-        settings.hotkey.shiftKey == e.shiftKey;
+    document.addEventListener("keydown", async (event) => {
+      const useHotkey = await settings.hotkey.getValue();
 
-      if (hotkeyMatches) {
+      if (!useHotkey) {
+        return;
+      }
+
+      const hotkey = await settings.hotkey.getValue();
+
+      if (!hotkey) {
+        return;
+      }
+
+      if (doesEventMatchHotkey(hotkey, event)) {
         stateMachine.send("hotkey");
       }
     });
 
     // inject button to the addon option page
-    function updateInjectedOptionButton() {
-      let optionButtonContainer = document.getElementById(
-        "hide-controls-options-button"
-      );
+    function updateInjectedOptionButton(): void {
+      let optionButtonContainer = document.getElementById("hide-controls-options-button");
 
       if (optionButtonContainer && !settings.injectOptionButton) {
         // remove if option changed
@@ -146,40 +150,39 @@ export default defineContentScript({
       optionButtonContainer.className = "style-scope ytd-masthead";
 
       const iconElement = document.createElement("img");
-      iconElement.src = chrome.runtime.getURL("icon.svg");
+      iconElement.src = icon;
       iconElement.className = "style-scope ytd-masthead";
       optionButtonContainer.appendChild(iconElement);
       rightHeaderContainer.prepend(optionButtonContainer);
 
-      let optionPopupElement = document.getElementById(
-        "hide-controls-option-popup"
-      );
       optionButtonContainer.addEventListener("click", () => {
-        if (optionPopupElement) {
-          if (optionPopupElement.style.display === "none") {
-            optionPopupElement.style.display = "block";
+        const existingOptionPopupElement = document.getElementById("hide-controls-option-popup");
+
+        if (existingOptionPopupElement) {
+          if (existingOptionPopupElement.style.display === "none") {
+            existingOptionPopupElement.style.display = "block";
           } else {
-            optionPopupElement.style.display = "none";
+            existingOptionPopupElement.style.display = "none";
           }
         } else {
-          optionPopupElement = document.createElement("iframe");
+          const newOptionPopupElement = document.createElement("iframe");
 
-          optionPopupElement.src = chrome.runtime.getURL("options/options.html");
-          optionPopupElement.id = "hide-controls-option-popup";
+          newOptionPopupElement.src = browser.runtime.getURL("/options.html");
+          newOptionPopupElement.id = "hide-controls-option-popup";
 
-          document.body.appendChild(optionPopupElement);
+          document.body.appendChild(newOptionPopupElement);
           document.addEventListener("keydown", (event) => {
             if ("Escape" === event.key) {
-              optionPopupElement.style.display = "none";
+              newOptionPopupElement.style.display = "none";
             }
           });
           document.addEventListener("click", (event) => {
             if (
-              optionPopupElement.style.display !== "none" &&
-              !optionButtonContainer.contains(event.target) &&
-              !optionPopupElement.contains(event.target)
+              newOptionPopupElement.style.display !== "none" &&
+              !optionButtonContainer.contains(event.target as Node) &&
+              !newOptionPopupElement.contains(event.target as Node)
             ) {
-              optionPopupElement.style.display = "none";
+              newOptionPopupElement.style.display = "none";
             }
           });
         }

@@ -89,7 +89,7 @@ input:invalid {
   height: 168px;
   margin-bottom: 2px;
   background-size: 300px 168px;
-  background-image: url("background.svg");
+  background-image: url("~/assets/background.svg");
 }
 .trigger-wrapper > div {
   position: absolute;

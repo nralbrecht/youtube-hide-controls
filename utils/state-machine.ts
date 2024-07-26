@@ -1,12 +1,30 @@
+import { Settings } from "./settings";
+
+interface StateDefinitions {
+  actions: {
+    onEnter: () => unknown;
+  };
+  transitions: Record<
+    string,
+    {
+      target: string;
+      guard?: () => Promise<boolean> | boolean;
+    }
+  >;
+}
+
 export class PlayerStateMachine {
-  constructor(showControls, hideControls, settings) {
+  private state: string;
+  private stateDefinitions: Record<string, StateDefinitions>;
+
+  constructor(showControls: () => void, hideControls: () => void, settings: Settings) {
     if (settings.invertTrigger) {
       this.state = "shownInverted";
     } else {
       this.state = "shown";
     }
 
-    const standartDefinitions = {
+    const standartDefinitions: Record<string, StateDefinitions> = {
       hidden: {
         actions: {
           onEnter: hideControls,
@@ -79,7 +97,7 @@ export class PlayerStateMachine {
       },
     };
 
-    const invertedDefinitions = {
+    const invertedDefinitions: Record<string, StateDefinitions> = {
       hiddenInverted: {
         actions: {
           onEnter: hideControls,
@@ -150,17 +168,17 @@ export class PlayerStateMachine {
     for (let state in invertedDefinitions) {
       invertedDefinitions[state].transitions["settingsChanged"] = {
         target: state.substring(0, state.length - "Inverted".length),
-        guard() {
-          return settings.invertTrigger;
+        async guard() {
+          return await settings.invertTrigger.getValue();
         },
       };
     }
 
-    for (let state in standartDefinitions) {
+    for (const state in standartDefinitions) {
       standartDefinitions[state].transitions["settingsChanged"] = {
         target: state + "Inverted",
-        guard() {
-          return !settings.invertTrigger;
+        async guard() {
+          return !(await settings.invertTrigger.getValue());
         },
       };
     }
@@ -171,7 +189,7 @@ export class PlayerStateMachine {
     };
   }
 
-  send(event) {
+  send(event: string) {
     const currentStateDefinition = this.stateDefinitions[this.state];
     const destinationTransition = currentStateDefinition.transitions[event];
 
