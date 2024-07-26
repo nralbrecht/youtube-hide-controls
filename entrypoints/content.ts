@@ -1,4 +1,5 @@
 import { doesEventMatchHotkey } from "@/utils/hotkey";
+import { sendMessage } from "@/utils/messaging";
 import { Settings } from "@/utils/settings.js";
 import injectStyleUrl from "~/assets/inject.css?url";
 import icon from "~/public/icon.svg";
@@ -21,33 +22,25 @@ export default defineContentScript({
     style.setAttribute("href", injectStyleUrl);
     (document.head || document.documentElement).appendChild(style);
 
-    function hideControls(): void {
+    async function hideControls(): Promise<void> {
       console.log("[youtube-hide-controls] HIDE_PLAYER!", settings);
-      window.postMessage({
-        source: "YOUTUBE_HIDE_CONTROL",
-        action: "HIDE_PLAYER",
-      });
+      await sendMessage("setControlsVisibility", true);
     }
 
-    function showControls(): void {
+    async function showControls(): Promise<void> {
       console.log("[youtube-hide-controls] SHOW_PLAYER!", settings);
-      window.postMessage({
-        source: "YOUTUBE_HIDE_CONTROL",
-        action: "SHOW_PLAYER",
-      });
+      await sendMessage("setControlsVisibility", false);
     }
 
-    function updateClassNames(): void {
-      window.postMessage({
-        source: "YOUTUBE_HIDE_CONTROL",
-        action: "HIDE_VIDEO_OVERLAYS",
-        value: settings.hideVideoOverlays,
-      });
-      window.postMessage({
-        source: "YOUTUBE_HIDE_CONTROL",
-        action: "HIDE_PLAY_PAUSE_ANIMATION",
-        value: settings.hidePlayPauseAnimation,
-      });
+    async function updateClassNames(): Promise<void> {
+      await sendMessage(
+        "setVideoOverlaysVisibility",
+        !(await settings.hideVideoOverlays.getValue())
+      );
+      await sendMessage(
+        "setPlayPauseAnimationVisibility",
+        !(await settings.hidePlayPauseAnimation.getValue())
+      );
     }
 
     const settings = new Settings();
