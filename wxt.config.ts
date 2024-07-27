@@ -2,6 +2,12 @@ import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
+  imports: {
+    eslintrc: {
+      enabled: 9,
+    },
+  },
+
   manifest: {
     name: "__MSG_extName__",
     description: "__MSG_extDescription__",

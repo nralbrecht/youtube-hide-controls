@@ -10,12 +10,14 @@
 
 import eslint from "@eslint/js";
 import pluginPrettier from "eslint-plugin-prettier/recommended";
-import tseslint, { config } from "typescript-eslint";
+import tseslint from "typescript-eslint";
+import autoImports from "./.wxt/eslint-auto-imports.mjs";
 
 export default tseslint.config({
   files: ["**/*.ts"],
-  ignores: [],
+  ignores: [".wxt/**", ".output/**"],
   extends: [
+    autoImports,
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
     ...tseslint.configs.strict,
