@@ -7,7 +7,7 @@ export interface HotKey {
   shiftKey: boolean;
 }
 
-export function doesEventMatchHotkey(a: HotKey, b: HotKey) {
+export function doesEventMatchHotkey(a: HotKey, b: HotKey): boolean {
   return (
     a.code === b.code &&
     a.altKey === b.altKey &&
@@ -17,7 +17,7 @@ export function doesEventMatchHotkey(a: HotKey, b: HotKey) {
   );
 }
 
-export function hotKeyToString(key: HotKey | undefined) {
+export function hotKeyToString(key: HotKey | undefined): string {
   if (!key || !key.key) {
     return "None";
   }

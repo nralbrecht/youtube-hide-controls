@@ -21,7 +21,7 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
     "postinstall": "wxt prepare",
-    "lint": "eslint entrypoints",
+    "lint": "eslint .",
     "format": "prettier --write \"**/*.ts\""
   },
   "devDependencies": {

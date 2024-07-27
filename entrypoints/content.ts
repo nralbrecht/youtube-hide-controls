@@ -1,6 +1,6 @@
 import { doesEventMatchHotkey } from "@/utils/hotkey";
 import { sendMessage } from "@/utils/messaging";
-import { Settings } from "@/utils/settings.js";
+import { addonSettings } from "@/utils/settings.js";
 import injectStyleUrl from "~/assets/inject.css?url";
 import icon from "~/public/icon.svg";
 import { PlayerStateMachine } from "~/utils/state-machine.js";
@@ -23,48 +23,49 @@ export default defineContentScript({
     (document.head || document.documentElement).appendChild(style);
 
     async function hideControls(): Promise<void> {
-      console.log("[youtube-hide-controls] HIDE_PLAYER!", settings);
+      console.log("[youtube-hide-controls] HIDE_PLAYER!");
       await sendMessage("setControlsVisibility", true);
     }
 
     async function showControls(): Promise<void> {
-      console.log("[youtube-hide-controls] SHOW_PLAYER!", settings);
+      console.log("[youtube-hide-controls] SHOW_PLAYER!");
       await sendMessage("setControlsVisibility", false);
     }
 
     async function updateClassNames(): Promise<void> {
       await sendMessage(
         "setVideoOverlaysVisibility",
-        !(await settings.hideVideoOverlays.getValue())
+        !(await addonSettings.getValue()).hideVideoOverlays
       );
       await sendMessage(
         "setPlayPauseAnimationVisibility",
-        !(await settings.hidePlayPauseAnimation.getValue())
+        !(await addonSettings.getValue()).hidePlayPauseAnimation
       );
     }
 
-    const settings = new Settings();
-    const stateMachine = new PlayerStateMachine(showControls, hideControls, settings);
-    settings.addOnChangeListener(() => {
-      stateMachine.send("settingsChanged");
-      updateClassNames();
-      onFullscreenChanged();
-      updateInjectedOptionButton();
+    const stateMachine = new PlayerStateMachine(showControls, hideControls);
+    addonSettings.watch(async () => {
+      await stateMachine.send("settingsChanged");
+      await updateClassNames();
+      await onFullscreenChanged();
+      await updateInjectedOptionButton();
     });
 
     // handle fullscreen change
-    function isFullscreen(): boolean {
-      if (settings.onlyFullscreen) {
+    async function isFullscreen(): Promise<boolean> {
+      const { onlyFullscreen } = await addonSettings.getValue();
+
+      if (onlyFullscreen) {
         return Boolean(document.fullscreenElement);
       }
       return true;
     }
 
-    function onFullscreenChanged(): void {
-      if (isFullscreen()) {
-        stateMachine.send("fullscreenEntered");
+    async function onFullscreenChanged(): Promise<void> {
+      if (await isFullscreen()) {
+        await stateMachine.send("fullscreenEntered");
       } else {
-        stateMachine.send("fullscreenExited");
+        await stateMachine.send("fullscreenExited");
       }
     }
 
@@ -73,56 +74,48 @@ export default defineContentScript({
 
     // handle mouse tigger zone
     document.addEventListener("mousemove", async (event) => {
-      if (!settings.useMouse) {
+      const { useMouse, trigger } = await addonSettings.getValue();
+
+      if (!useMouse) {
         return;
       }
 
-      const triggerLeft = await settings.triggerLeft.getValue();
-      const triggerTop = await settings.triggerTop.getValue();
-      const triggerRight = await settings.triggerRight.getValue();
-      const triggerBottom = await settings.triggerBottom.getValue();
-
       const mouseIsInTriggerZone =
-        event.clientX < triggerLeft ||
-        event.clientY < triggerTop ||
-        document.documentElement.clientWidth - event.clientX < triggerRight ||
-        document.documentElement.clientHeight - event.clientY < triggerBottom;
+        event.clientX < trigger.left ||
+        event.clientY < trigger.top ||
+        document.documentElement.clientWidth - event.clientX < trigger.right ||
+        document.documentElement.clientHeight - event.clientY < trigger.bottom;
 
       if (mouseIsInTriggerZone) {
-        stateMachine.send("mouseTriggerZoneEntered");
+        await stateMachine.send("mouseTriggerZoneEntered");
       } else {
-        stateMachine.send("mouseTriggerZoneExited");
+        await stateMachine.send("mouseTriggerZoneExited");
       }
     });
 
     // handle hotkey
     document.addEventListener("keydown", async (event) => {
-      const useHotkey = await settings.hotkey.getValue();
+      const { useHotkey, hotkey } = await addonSettings.getValue();
 
-      if (!useHotkey) {
-        return;
-      }
-
-      const hotkey = await settings.hotkey.getValue();
-
-      if (!hotkey) {
+      if (!useHotkey || !hotkey) {
         return;
       }
 
       if (doesEventMatchHotkey(hotkey, event)) {
-        stateMachine.send("hotkey");
+        await stateMachine.send("hotkey");
       }
     });
 
     // inject button to the addon option page
-    function updateInjectedOptionButton(): void {
+    async function updateInjectedOptionButton(): Promise<void> {
+      const { injectOptionButton } = await addonSettings.getValue();
       let optionButtonContainer = document.getElementById("hide-controls-options-button");
 
-      if (optionButtonContainer && !settings.injectOptionButton) {
+      if (optionButtonContainer && !injectOptionButton) {
         // remove if option changed
         optionButtonContainer.style.display = "none";
         return;
-      } else if (!optionButtonContainer && !settings.injectOptionButton) {
+      } else if (!optionButtonContainer && !injectOptionButton) {
         return;
       } else if (optionButtonContainer) {
         // ignore if allready injected
@@ -133,7 +126,7 @@ export default defineContentScript({
       const rightHeaderContainer = document.querySelector("ytd-masthead #end");
 
       if (!rightHeaderContainer) {
-        setTimeout(() => updateInjectedOptionButton(), 1000);
+        setTimeout(updateInjectedOptionButton, 1000);
         return;
       }
 

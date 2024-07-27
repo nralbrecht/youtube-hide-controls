@@ -1,5 +1,3 @@
-import { Settings } from "./settings";
-
 interface StateDefinitions {
   actions: {
     onEnter: () => unknown;
@@ -14,15 +12,22 @@ interface StateDefinitions {
 }
 
 export class PlayerStateMachine {
-  private state: string;
+  private state = "shown";
   private stateDefinitions: Record<string, StateDefinitions>;
 
-  constructor(showControls: () => void, hideControls: () => void, settings: Settings) {
-    if (settings.invertTrigger) {
-      this.state = "shownInverted";
-    } else {
-      this.state = "shown";
-    }
+  constructor(showControls: () => void, hideControls: () => void) {
+    addonSettings
+      .getValue()
+      .then((settings) => {
+        if (settings) {
+          this.state = "shownInverted";
+        } else {
+          this.state = "shown";
+        }
+      })
+      .catch((error) => {
+        console.error("error loading settings", error);
+      });
 
     const standartDefinitions: Record<string, StateDefinitions> = {
       hidden: {
@@ -35,8 +40,8 @@ export class PlayerStateMachine {
           },
           mouseTriggerZoneExited: {
             target: "shown",
-            guard() {
-              return !settings.onlyFullscreen;
+            async guard(): Promise<boolean> {
+              return !(await addonSettings.getValue()).onlyFullscreen;
             },
           },
           hotkey: {
@@ -54,8 +59,8 @@ export class PlayerStateMachine {
           },
           mouseTriggerZoneEntered: {
             target: "hidden",
-            guard() {
-              return !settings.onlyFullscreen;
+            async guard(): Promise<boolean> {
+              return !(await addonSettings.getValue()).onlyFullscreen;
             },
           },
           hotkey: {
@@ -165,11 +170,11 @@ export class PlayerStateMachine {
     };
 
     // switch from/to the inverted state when the "invertTrigger" setting changes
-    for (let state in invertedDefinitions) {
+    for (const state in invertedDefinitions) {
       invertedDefinitions[state].transitions["settingsChanged"] = {
         target: state.substring(0, state.length - "Inverted".length),
-        async guard() {
-          return await settings.invertTrigger.getValue();
+        async guard(): Promise<boolean> {
+          return (await addonSettings.getValue()).invertTrigger;
         },
       };
     }
@@ -177,8 +182,8 @@ export class PlayerStateMachine {
     for (const state in standartDefinitions) {
       standartDefinitions[state].transitions["settingsChanged"] = {
         target: state + "Inverted",
-        async guard() {
-          return !(await settings.invertTrigger.getValue());
+        async guard(): Promise<boolean> {
+          return !(await addonSettings.getValue()).invertTrigger;
         },
       };
     }
@@ -189,7 +194,7 @@ export class PlayerStateMachine {
     };
   }
 
-  send(event: string) {
+  async send(event: string): Promise<string | undefined> {
     const currentStateDefinition = this.stateDefinitions[this.state];
     const destinationTransition = currentStateDefinition.transitions[event];
 
@@ -200,7 +205,7 @@ export class PlayerStateMachine {
     const destinationState = destinationTransition.target;
     const destinationStateDefinition = this.stateDefinitions[destinationState];
 
-    if (destinationTransition.guard && destinationTransition.guard()) {
+    if (destinationTransition.guard && (await destinationTransition.guard())) {
       return;
     }
 
