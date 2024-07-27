@@ -255,7 +255,6 @@ input:checked + .slider:before {
 }
 
 .select-options {
-  display: none;
   position: absolute;
   top: 100%;
   right: 0;
