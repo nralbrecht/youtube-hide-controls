@@ -6,7 +6,8 @@ import icon from "~/public/icon.svg";
 import { PlayerStateMachine } from "~/utils/state-machine.js";
 
 export default defineContentScript({
-  matches: ["*://www.youtube.com/*"],
+  matches: ["*://*.youtube.com/*"],
+  runAt: "document_idle",
   main(): void {
     // inject player script
     const script = document.createElement("script");
