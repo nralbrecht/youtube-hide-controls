@@ -54,7 +54,6 @@
     presetSelectActive = false;
 
     const clickedPreset = getPresetById(clickedPresetId);
-    console.log("handlePresetOptionClick", clickedPresetId, clickedPreset);
 
     settings = {
       ...settings,
@@ -64,7 +63,6 @@
 
   function getCurrentPreset(addonSettings: AddonSettings): Preset {
     const matchingPreset = presets.find((preset) => {
-      console.log("getCurrentPreset find", preset);
       return presetMatchesSettings(preset, addonSettings);
     });
 
@@ -162,9 +160,6 @@
     }
   }
 </script>
-
-{@debug settings}
-{@debug currentPreset}
 
 <svelte:document on:click={() => (presetSelectActive = false)} />
 
