@@ -37,6 +37,7 @@
     "svelte": "^4.2.18",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.17.0",
-    "wxt": "^0.18.15"
+    "wxt": "^0.18.15",
+    "xstate": "^5.16.0"
   }
 }

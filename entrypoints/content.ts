@@ -25,12 +25,12 @@ export default defineContentScript({
 
     async function hideControls(): Promise<void> {
       console.log("[youtube-hide-controls] HIDE_PLAYER!");
-      await sendMessage("setControlsVisibility", true);
+      await sendMessage("setControlsVisibility", false);
     }
 
     async function showControls(): Promise<void> {
       console.log("[youtube-hide-controls] SHOW_PLAYER!");
-      await sendMessage("setControlsVisibility", false);
+      await sendMessage("setControlsVisibility", true);
     }
 
     async function updateClassNames(): Promise<void> {
@@ -46,7 +46,6 @@ export default defineContentScript({
 
     const stateMachine = new PlayerStateMachine(showControls, hideControls);
     addonSettings.watch(async () => {
-      await stateMachine.send("settingsChanged");
       await updateClassNames();
       await onFullscreenChanged();
       await updateInjectedOptionButton();
@@ -64,9 +63,9 @@ export default defineContentScript({
 
     async function onFullscreenChanged(): Promise<void> {
       if (await isFullscreen()) {
-        await stateMachine.send("fullscreenEntered");
+        stateMachine.send({ type: "fullscreenEntered" });
       } else {
-        await stateMachine.send("fullscreenExited");
+        stateMachine.send({ type: "fullscreenExited" });
       }
     }
 
@@ -88,9 +87,9 @@ export default defineContentScript({
         document.documentElement.clientHeight - event.clientY < trigger.bottom;
 
       if (mouseIsInTriggerZone) {
-        await stateMachine.send("mouseTriggerZoneEntered");
+        stateMachine.send({ type: "mouseTriggerZoneEntered" });
       } else {
-        await stateMachine.send("mouseTriggerZoneExited");
+        stateMachine.send({ type: "mouseTriggerZoneExited" });
       }
     });
 
@@ -103,7 +102,7 @@ export default defineContentScript({
       }
 
       if (doesEventMatchHotkey(hotkey, event)) {
-        await stateMachine.send("hotkey");
+        stateMachine.send({ type: "hotkeyPressed" });
       }
     });
 
