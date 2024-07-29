@@ -49,7 +49,9 @@ export const presets: Preset[] = [
 
 export function presetMatchesSettings(preset: Preset, settings: AddonSettings): boolean {
   // downcasting because interfaces are not indexable by string even if only valid keys are used
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const presetSettingsRecord = preset.settings as Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const settingsRecord = settings as Record<string, any>;
 
   console.log("presetMatchesSettings1", preset, settingsRecord);

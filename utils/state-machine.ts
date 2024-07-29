@@ -9,7 +9,7 @@ export class PlayerStateMachine {
   constructor(showControls: () => void, hideControls: () => void) {
     this.machine = setup({
       types: {
-        context: {} as {},
+        context: {} as Record<string, never>,
         events: {} as
           | { type: "hotkeyPressed" }
           | { type: "fullscreenEntered" }
@@ -246,16 +246,23 @@ export class PlayerStateMachine {
 
     this.actor = createActor(this.machine);
 
-    addonSettings.getValue().then((newSettings) => {
-      this.settings = newSettings;
+    addonSettings
+      .getValue()
+      .then((newSettings) => {
+        this.settings = newSettings;
 
-      this.actor.start();
-      this.actor.send({ type: "initialized" });
-    });
+        this.actor.start();
+        this.actor.send({ type: "initialized" });
+      })
+      .catch((error) => {
+        console.error(
+          "unable to initialize state machine because an error occured while fetching settings",
+          error
+        );
+      });
 
     addonSettings.watch((newSettings, oldSettings) => {
       this.settings = newSettings;
-      console.log("init addonSettings.watch", this.settings);
 
       if (newSettings.invertTrigger !== oldSettings.invertTrigger) {
         if (newSettings.invertTrigger) {
