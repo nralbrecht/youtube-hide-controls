@@ -1,8 +1,8 @@
 import { doesEventMatchHotkey } from "@/utils/hotkey";
 import { sendMessage } from "@/utils/messaging";
 import { addonSettings } from "@/utils/settings.js";
+import icon from "~/assets/icon.svg";
 import injectStyleUrl from "~/assets/inject.css?url";
-import icon from "~/public/icon.svg";
 import { PlayerStateMachine } from "~/utils/state-machine.js";
 
 export default defineContentScript({
