@@ -39,6 +39,10 @@
       code: event.code,
       key: event.key,
     };
+
+    updateAppSettings().catch((error) => {
+      console.error("Unable to store hotkey in the settings");
+    });
   }
 
   let presetSelectActive = false;
